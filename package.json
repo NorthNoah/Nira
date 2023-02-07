@@ -44,9 +44,18 @@
     ]
   },
   "devDependencies": {
+    "commitizen": "^4.3.0",
+    "conventional-changelog-cli": "^2.2.2",
+    "cz-conventional-changelog-zh": "^0.0.2",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "prettier": "2.8.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "lint-staged": {
     "*.{js,css,md,ts,tsx}": "prettier --write"
