@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-const list = memo(({ list }) => {
+const list = memo(({ list, users }) => {
   return (
     <div>
       <table>
@@ -13,9 +13,10 @@ const list = memo(({ list }) => {
         <tbody>
           {list.map((project) => {
             return (
-              <tr>
+              <tr key={project.id}>
                 <td>{project.name}</td>
-                <td>{project.personName}</td>
+                {/* 需要从userNames中寻找到符合id的并返回 */}
+                <td>{users.find(user => user.id === project.personId)?.name || '未知'}</td>
               </tr>
             )
           })}

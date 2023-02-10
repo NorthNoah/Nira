@@ -1,33 +1,50 @@
 import React, { memo, useState, useEffect } from 'react'
 import SearchPannel from './search-panel'
 import List from './list'
-const apiUrl = process.env.REACT_APP_API_URL
+import * as qs from 'qs'
+import { cleanObject } from 'utils'
+// 此种写法 默认访问3000端口
+// const apiUrl = process.env.REACT_APP_API_URL
+const apiUrl = 'http://localhost:3001'
 
 // 本地开发时(npm start)，访问mock；构建产物(npm build),访问真实地址
 const ProjectListPages = memo(() => {
   // 两个参数
-  const [projName, setProjName] = useState('')
-  const [personId, setPersonId] = useState('')
+  //   const [projName, setProjName] = useState('')
+  //   const [personId, setPersonId] = useState('')
+  const [param, setParam] = useState({
+    name: '',
+    personId: ''
+  })
 
   // 获取数据
   const [list, setList] = useState([])
+  // 映射userId和userName
+  const [users, setUsers] = useState([])
 
   // 当参数改变时，获取接口中的数据
   useEffect(() => {
-    fetch(`${apiUrl}/projects`).then(async (response) => {
+    // fetch(`${apiUrl}/projects?name=${projName}&personId=${personId}`).then(async (response) => {
+    // qs工具简化查询
+    fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async (response) => {
       const res = await response.json()
+      console.log(res)
       setList(res)
     })
-  }, [projName, personId])
+  }, [param])
+
+  // 只需要触发一次
+  useEffect(() => {
+    fetch(`${apiUrl}/users`).then(async (response) => {
+      const res = await response.json()
+      setUsers(res)
+    })
+  })
+
   return (
     <div>
-      <SearchPannel
-        projName={projName}
-        setProjName={setProjName}
-        personId={personId}
-        setPersonId={setPersonId}
-      />
-      <List list={list} />
+      <SearchPannel param={param} setParam={setParam} users={users} />
+      <List users={users} list={list} />
     </div>
   )
 })

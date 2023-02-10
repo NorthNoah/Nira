@@ -1,28 +1,29 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo } from 'react'
 
-const SearchPannel = memo(({ projName, setProjName, personId, setPersonId }) => {
+const SearchPannel = memo(({ users, param, setParam }) => {
   // const [param, setParam] = useState({
   //     projectName: '',
   //     personId: ''
   // })
 
-  const [users, setUsers] = useState([])
-
   return (
     <div>
       <input
         type="text"
-        value={projName}
+        value={param.name}
         onChange={(e) =>
-          setProjName({
-            projName: e.target.value
+          setParam({
+            // 注意浅拷贝写法
+            ...param,
+            name: e.target.value
           })
         }
       />
       <select
-        value={personId}
+        value={param.personId}
         onChange={(e) =>
-          setPersonId({
+          setParam({
+            ...param,
             personId: e.target.value
           })
         }
@@ -30,7 +31,7 @@ const SearchPannel = memo(({ projName, setProjName, personId, setPersonId }) => 
         <option value="">负责人</option>
         {/* 遍历users列表 */}
         {users.map((user) => {
-          return <option value={user.id}>{user.name}</option>
+          return <option key={user.id} value={user.id}>{user.name}</option>
         })}
       </select>
     </div>
