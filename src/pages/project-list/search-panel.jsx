@@ -15,7 +15,7 @@ const SearchPannel = memo(({ users, param, setParam }) => {
           setParam({
             // 注意浅拷贝写法
             ...param,
-            name: e.target.value
+            name: e.target.value,
           })
         }
       />
