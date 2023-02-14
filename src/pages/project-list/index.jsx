@@ -2,7 +2,7 @@ import React, { memo, useState, useEffect } from 'react'
 import SearchPannel from './search-panel'
 import List from './list'
 import * as qs from 'qs'
-import { cleanObject } from 'utils'
+import { cleanObject, useMount } from 'utils'
 // 此种写法 默认访问3000端口
 // const apiUrl = process.env.REACT_APP_API_URL
 const apiUrl = 'http://localhost:3001'
@@ -27,6 +27,9 @@ const ProjectListPages = memo(() => {
     // fetch(`${apiUrl}/projects?name=${projName}&personId=${personId}`).then(async (response) => {
     // qs工具简化查询
     fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async (response) => {
+      console.log(qs.stringify(cleanObject(param)))
+      console.log(cleanObject(param))
+      console.log(param)
       if (response.ok) {
         const res = await response.json()
         setList(res)
@@ -35,7 +38,7 @@ const ProjectListPages = memo(() => {
   }, [param])
 
   // 只需要触发一次
-  useEffect(() => {
+  useMount(() => {
     fetch(`${apiUrl}/users`).then(async (response) => {
       if (response.ok) {
         const res = await response.json()
