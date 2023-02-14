@@ -27,17 +27,20 @@ const ProjectListPages = memo(() => {
     // fetch(`${apiUrl}/projects?name=${projName}&personId=${personId}`).then(async (response) => {
     // qs工具简化查询
     fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async (response) => {
-      const res = await response.json()
-      console.log(res)
-      setList(res)
+      if (response.ok) {
+        const res = await response.json()
+        setList(res)
+      }
     })
   }, [param])
 
   // 只需要触发一次
   useEffect(() => {
     fetch(`${apiUrl}/users`).then(async (response) => {
-      const res = await response.json()
-      setUsers(res)
+      if (response.ok) {
+        const res = await response.json()
+        setUsers(res)
+      }
     })
   })
 
