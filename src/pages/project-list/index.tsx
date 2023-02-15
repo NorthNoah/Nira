@@ -2,7 +2,7 @@ import React, { memo, useState, useEffect } from 'react'
 import SearchPannel from './search-panel'
 import List from './list'
 import * as qs from 'qs'
-import { cleanObject, useMount } from 'utils'
+import { cleanObject, useMount, useDebounce } from 'utils'
 // 此种写法 默认访问3000端口
 // const apiUrl = process.env.REACT_APP_API_URL
 const apiUrl = 'http://localhost:3001'
@@ -22,20 +22,19 @@ const ProjectListPages = memo(() => {
   // 映射userId和userName
   const [users, setUsers] = useState([])
 
+  const debouncedParam = useDebounce(param, 500)
+
   // 当参数改变时，获取接口中的数据
   useEffect(() => {
     // fetch(`${apiUrl}/projects?name=${projName}&personId=${personId}`).then(async (response) => {
     // qs工具简化查询
     fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(async (response) => {
-      console.log(qs.stringify(cleanObject(param)))
-      console.log(cleanObject(param))
-      console.log(param)
       if (response.ok) {
         const res = await response.json()
         setList(res)
       }
     })
-  }, [param])
+  }, [debouncedParam])
 
   // 只需要触发一次
   useMount(() => {
