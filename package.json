@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@types/qs": "^6.9.7",
     "commitizen": "^4.3.0",
     "conventional-changelog-cli": "^2.2.2",
     "cz-conventional-changelog-zh": "^0.0.2",
