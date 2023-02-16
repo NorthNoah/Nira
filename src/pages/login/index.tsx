@@ -3,7 +3,7 @@ const apiUrl = 'http://localhost:3001'
 
 const LoginPage = memo(() => {
   const login = (param: { username: string; password: string }) => {
-    fetch(`${apiUrl}/login`, {
+    fetch(`${apiUrl}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ const LoginPage = memo(() => {
         <input type="password" id="password" />
       </div>
       <div>
-        <button type="submit">登录</button>
+        <button type="submit">注册</button>
       </div>
     </form>
   )
