@@ -1,20 +1,19 @@
+import { useAuth } from 'context/auth-context'
 import React, { FormEvent, memo } from 'react'
-const apiUrl = 'http://localhost:3001'
-
 const LoginPage = memo(() => {
-  const login = (param: { username: string; password: string }) => {
-    fetch(`${apiUrl}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(param)
-    }).then(async (response) => {
-      if (response.ok) {
-      }
-    })
-  }
-
+  // const login = (param: { username: string; password: string }) => {
+  //   fetch(`${apiUrl}/register`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(param)
+  //   }).then(async (response) => {
+  //     if (response.ok) {
+  //     }
+  //   })
+  // }
+  const { login, user } = useAuth()
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     //查看onSumit的函数签名，判断event的类型
     event.preventDefault()
@@ -25,6 +24,12 @@ const LoginPage = memo(() => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {/* 登录成功判断逻辑 */}
+      {user ? (
+        <div>
+          登录成功,用户名: {user?.name} token: {user?.token}
+        </div>
+      ) : null}
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id="username" />
