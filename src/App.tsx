@@ -1,12 +1,14 @@
 import React, { memo } from 'react'
-import ProjectListPages from 'pages/project-list'
-import LoginPage from 'pages/login'
+import { useAuth } from 'context/auth-context'
+import { AuthenticatedApp } from 'authenticated-app'
+import UnauthenticatedApp from 'unauthenticated-app'
 
 const App = memo(() => {
+  const { user } = useAuth()
   return (
-    <div>
-      {/* <ProjectListPages /> */}
-      <LoginPage />
+    <div className="app">
+      {/* 根据user切换对应的页面 */}
+      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </div>
   )
 })
