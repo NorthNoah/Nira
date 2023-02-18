@@ -1,9 +1,24 @@
 import React, { ProviderProps, ReactNode, useState, createContext, useContext } from 'react'
 import * as auth from 'auth/auth-provider'
 import { User } from 'pages/project-list/search-panel'
+import { http } from 'utils/http'
+import { useMount } from 'utils'
 interface AuthForm {
   username: string
   password: string
+}
+
+// 登录持久化实现
+// 每次刷新先对User进行初始化,首先尝试获取localStorage中的token
+const bootstrapUser = async () => {
+  let user = null
+  const token = auth.getToken()
+  if (token) {
+    // 若token存在,则带着本地存储中的token去请求数据
+    const data = await http('me', { token })
+    user = data.user
+  }
+  return user
 }
 
 // hooks写法，创建context
@@ -25,6 +40,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = (form: AuthForm) => auth.login(form).then((user) => setUser(user))
   const register = (form: AuthForm) => auth.register(form).then((user) => setUser(user))
   const logout = () => auth.logout().then(() => setUser(null))
+
+  // 刷新后,自动初始化User,带着token去请求user,并将user的值设置到state中
+  useMount(() => {
+    bootstrapUser().then(setUser)
+  })
   return <AuthContext.Provider children={children} value={{ user, login, register, logout }} />
 }
 

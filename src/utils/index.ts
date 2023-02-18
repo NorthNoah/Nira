@@ -15,7 +15,6 @@ export const cleanObject = (obj: object) => {
       delete res[key]
     }
   })
-  console.log(res)
   return res
 }
 
@@ -24,6 +23,7 @@ export const useMount = (callback: () => void) => {
   // 内部采用空置的dep实现
   useEffect(() => {
     callback()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 }
 
