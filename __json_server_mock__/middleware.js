@@ -7,6 +7,14 @@ module.exports = (req, res, next) => {
           token: '123'
         }
       })
+    } else if (req.method === 'POST' && req.url === '/me') {
+      return res.status(200).json({
+        user: {
+          // 返回token，实现JWT
+          name: 'Noah',
+          password: '123456'
+        }
+      })
     } else {
       return res.status(400).json({ message: '用户名或密码错误' })
     }

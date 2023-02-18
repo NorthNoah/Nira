@@ -10,6 +10,7 @@ export const getToken = () => window.localStorage.getItem(localStorageKey)
 
 export const handleUserResponse = ({ user }: { user: User }) => {
   window.localStorage.setItem(localStorageKey, user.token || '')
+  console.log(user)
   return user
 }
 
@@ -22,7 +23,9 @@ export const login = (data: { username: string; password: string }) => {
     body: JSON.stringify(data)
   }).then(async (response) => {
     if (response.ok) {
-      return handleUserResponse(await response.json())
+      const res = await response.json()
+      console.log(res)
+      return handleUserResponse(res)
     } else {
       return Promise.reject(data)
     }

@@ -4,7 +4,6 @@ import RegisterPage from './register'
 
 const UnauthenticatedApp = memo(() => {
   const [isRegister, setIsRegister] = useState(false)
-  console.log(isRegister)
   return (
     <div>
       {isRegister ? <RegisterPage /> : <LoginPage />}
