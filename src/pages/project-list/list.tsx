@@ -1,3 +1,4 @@
+import { Table } from 'antd'
 import React, { memo } from 'react'
 import { User } from './search-panel'
 interface Project {
@@ -15,9 +16,25 @@ interface ListProps {
 }
 
 const list = memo(({ list, users }: ListProps) => {
+  const columns = [
+    {
+      title: '名称',
+      dataIndex: 'name',
+      key: 'name',
+      sorter: (a: Project, b: Project) => a.name.localeCompare(b.name)
+    }
+    // {
+    //   title: "负责人",
+    //   render: (list.map((project)) {
+    //     return <span>
+    //       {users.find((user) => user.id === project.personId)?.name || '未知'}
+    //     </span>
+    //   }
+    // }
+  ]
   return (
     <div>
-      <table>
+      <Table dataSource={list} columns={columns}>
         <thead>
           <tr>
             <th>名称</th>
@@ -35,7 +52,7 @@ const list = memo(({ list, users }: ListProps) => {
             )
           })}
         </tbody>
-      </table>
+      </Table>
     </div>
   )
 })

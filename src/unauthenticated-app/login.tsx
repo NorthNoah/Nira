@@ -1,5 +1,5 @@
 import { useAuth } from 'context/auth-context'
-import React, { FormEvent, memo } from 'react'
+import React, { memo } from 'react'
 import { Button, Form, Input } from 'antd'
 const LoginPage = memo(() => {
   // const login = (param: { username: string; password: string }) => {
@@ -39,13 +39,14 @@ const LoginPage = memo(() => {
       <Form.Item name={'username'} rules={[{ required: true, message: '请输入用户名' }]}>
         <Input placeholder={'用户名'} type="text" id={'username'} />
       </Form.Item>
-      <div>
-        <label htmlFor="password">密码</label>
-        <input type="password" id="password" />
-      </div>
-      <div>
-        <button type="submit">登录</button>
-      </div>
+      <Form.Item name={'password'} rules={[{ required: true, message: '请输入密码' }]}>
+        <Input placeholder={'密码'} type="password" id={'password'} />
+      </Form.Item>
+      <Form.Item>
+        <Button htmlType="submit" type="primary">
+          登录
+        </Button>
+      </Form.Item>
     </Form>
   )
 })
