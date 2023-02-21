@@ -1,6 +1,7 @@
 import { useAuth } from 'context/auth-context'
 import React, { FormEvent, memo } from 'react'
 import { Button, Form, Input } from 'antd'
+import { LongButton } from 'unauthenticated-app'
 const RegisterPage = memo(() => {
   // const login = (param: { username: string; password: string }) => {
   //   fetch(`${apiUrl}/register`, {
@@ -43,9 +44,9 @@ const RegisterPage = memo(() => {
         <Input placeholder={'密码'} type="password" id={'password'} />
       </Form.Item>
       <Form.Item>
-        <Button htmlType="submit" type="primary">
+        <LongButton htmlType="submit" type="primary">
           注册
-        </Button>
+        </LongButton>
       </Form.Item>
     </Form>
   )
