@@ -46,7 +46,6 @@ const SearchPannel = memo(({ users, param, setParam }: SearchPanelProps) => {
         </Form.Item>
         <Form.Item>
           <Select
-            defaultValue="负责人"
             value={param.personId}
             onChange={(value) =>
               setParam({

@@ -42,6 +42,7 @@ const list = memo(({ list, users }: ListProps) => {
     // </div>
     <Container>
       <Table
+        rowKey={'id'}
         pagination={false}
         columns={[
           {

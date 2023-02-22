@@ -1,4 +1,4 @@
-import React, { ProviderProps, ReactNode, useState, createContext, useContext } from 'react'
+import React, { ReactNode, useState, createContext, useContext } from 'react'
 import * as auth from 'auth/auth-provider'
 import { User } from 'pages/project-list/search-panel'
 import { http } from 'utils/http'

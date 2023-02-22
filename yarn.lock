@@ -11816,6 +11816,14 @@ react-query-devtools@^2.6.3:
   dependencies:
     match-sorter "^4.1.0"
 
+react-query@3.5.10:
+  version "3.5.10"
+  resolved "https://registry.npmmirror.com/react-query/-/react-query-3.5.10.tgz#c6bc348dcea932b59035e93ad4ab5d98d4234fd1"
+  integrity sha512-gYW9xgRdCoEXwvnXw+r4hxYkD2/csIc/NGdEjFgjXSd04yiR77b8mFW+qNVTcFSoH0NUjEcLt94OLWuOK02oGA==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    match-sorter "^6.0.2"
+
 react-query@^2.26.3:
   version "2.26.4"
   resolved "https://registry.npmmirror.com/react-query/-/react-query-2.26.4.tgz#18239b4c0b61d0b744f0d4a91f566b294fa9f752"

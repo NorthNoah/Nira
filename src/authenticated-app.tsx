@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 import { Row } from './components/lib'
 // 以组件的形式渲染SVG
 import { ReactComponent as SoftwareLogo } from './assets/software-logo.svg'
-import { Dropdown, Menu } from 'antd'
+import { Button, Dropdown, Menu } from 'antd'
 
 export const AuthenticatedApp = () => {
   const { logout, user } = useAuth()
@@ -23,7 +23,9 @@ export const AuthenticatedApp = () => {
             overlay={
               <Menu>
                 <Menu.Item key={'logout'}>
-                  <a onClick={logout}>登出</a>
+                  <Button type="link" onClick={logout}>
+                    登出
+                  </Button>
                 </Menu.Item>
               </Menu>
             }

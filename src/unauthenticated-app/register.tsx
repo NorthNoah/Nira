@@ -1,6 +1,6 @@
 import { useAuth } from 'context/auth-context'
-import React, { FormEvent, memo } from 'react'
-import { Button, Form, Input } from 'antd'
+import React, { memo } from 'react'
+import { Form, Input } from 'antd'
 import { LongButton } from 'unauthenticated-app'
 const RegisterPage = memo(() => {
   // const login = (param: { username: string; password: string }) => {
@@ -15,7 +15,7 @@ const RegisterPage = memo(() => {
   //     }
   //   })
   // }
-  const { register, user } = useAuth()
+  const { register } = useAuth()
   // 手动实现逻辑
   // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
   //   //查看onSumit的函数签名，判断event的类型
