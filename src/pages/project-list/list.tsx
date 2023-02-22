@@ -1,4 +1,6 @@
+import styled from '@emotion/styled'
 import { Table } from 'antd'
+import dayjs from 'dayjs'
 import React, { memo } from 'react'
 import { User } from './search-panel'
 interface Project {
@@ -38,24 +40,44 @@ const list = memo(({ list, users }: ListProps) => {
     //     </tbody>
     //   </Table>
     // </div>
-    <Table
-      pagination={false}
-      columns={[
-        {
-          title: '名称',
-          dataIndex: 'name',
-          sorter: (a, b) => a.name.localeCompare(b.name)
-        },
-        {
-          title: '负责人',
-          render(value, project) {
-            return <span>{users.find((user) => user.id === project.personId)?.name || '未知'}</span>
+    <Container>
+      <Table
+        pagination={false}
+        columns={[
+          {
+            title: '名称',
+            dataIndex: 'name',
+            sorter: (a, b) => a.name.localeCompare(b.name)
+          },
+          {
+            title: '部门',
+            dataIndex: 'organization'
+          },
+          {
+            title: '负责人',
+            render(project) {
+              return (
+                <span>{users.find((user) => user.id === project.personId)?.name || '未知'}</span>
+              )
+            }
+          },
+          {
+            title: '创建时间',
+            render(project) {
+              return (
+                <span>{project.created ? dayjs(project.created).format('YYYY-MM-DD') : '无'}</span>
+              )
+            }
           }
-        }
-      ]}
-      dataSource={list}
-    />
+        ]}
+        dataSource={list}
+      />
+    </Container>
   )
 })
+
+const Container = styled.div`
+  padding: 0 3.2rem;
+`
 
 export default list
