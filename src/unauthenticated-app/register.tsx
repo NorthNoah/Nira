@@ -2,7 +2,8 @@ import { useAuth } from 'context/auth-context'
 import React, { memo } from 'react'
 import { Form, Input } from 'antd'
 import { LongButton } from 'unauthenticated-app'
-const RegisterPage = memo(() => {
+import { useAsync } from 'utils/use-async'
+const RegisterPage = memo(({ onError }: { onError: (error: Error) => void }) => {
   // const login = (param: { username: string; password: string }) => {
   //   fetch(`${apiUrl}/register`, {
   //     method: 'POST',
@@ -16,6 +17,7 @@ const RegisterPage = memo(() => {
   //   })
   // }
   const { register } = useAuth()
+  const { run, isLoading } = useAsync(undefined, { throwOnError: true })
   // 手动实现逻辑
   // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
   //   //查看onSumit的函数签名，判断event的类型
@@ -24,8 +26,23 @@ const RegisterPage = memo(() => {
   //   const password = (event.currentTarget.elements[1] as HTMLInputElement).value //类型断言为HTMLInputElement,否则会找不到value
   //   login({ username, password })
   // }
-  const handleSubmit = (values: { username: string; password: string }) => {
-    register(values)
+  const handleSubmit = async ({
+    cpassword,
+    ...values
+  }: {
+    username: string
+    password: string
+    cpassword: string
+  }) => {
+    if (cpassword !== values.password) {
+      onError(new Error('请确认两次输入的密码相同'))
+      return
+    }
+    try {
+      await run(register(values))
+    } catch (e) {
+      onError(e)
+    }
   }
 
   return (
@@ -43,8 +60,11 @@ const RegisterPage = memo(() => {
       <Form.Item name={'password'} rules={[{ required: true, message: '请输入密码' }]}>
         <Input placeholder={'密码'} type="password" id={'password'} />
       </Form.Item>
+      <Form.Item name={'cpassword'} rules={[{ required: true, message: '请确认密码' }]}>
+        <Input placeholder={'确认密码'} type="password" id={'cpassword'} />
+      </Form.Item>
       <Form.Item>
-        <LongButton htmlType="submit" type="primary">
+        <LongButton loading={isLoading} htmlType="submit" type="primary">
           注册
         </LongButton>
       </Form.Item>

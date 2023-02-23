@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Button, Card, Divider } from 'antd'
+import { Button, Card, Divider, Typography } from 'antd'
 import React, { memo, useState } from 'react'
 import LoginPage from './login'
 import RegisterPage from './register'
@@ -9,13 +9,18 @@ import left from 'assets/left.svg'
 
 const UnauthenticatedApp = memo(() => {
   const [isRegister, setIsRegister] = useState(false)
+  // 控制error是否显示的状态
+  const [error, setError] = useState<Error | null>(null)
+
   return (
     <Container>
       <Header />
       <Background />
       <ShadowCard>
         <Title>{isRegister ? '请注册' : '请登录'}</Title>
-        {isRegister ? <RegisterPage /> : <LoginPage />}
+        {/* 错误处理 */}
+        {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
+        {isRegister ? <RegisterPage onError={setError} /> : <LoginPage onError={setError} />}
         <Divider />
         <Button type="link" onClick={() => setIsRegister(!isRegister)}>
           {isRegister ? '已经有账号了？直接登录' : '没有账号，注册新账号'}
