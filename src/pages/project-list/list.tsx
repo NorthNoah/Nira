@@ -1,23 +1,24 @@
 import styled from '@emotion/styled'
 import { Table } from 'antd'
+import { TableProps } from 'antd/lib/table'
 import dayjs from 'dayjs'
 import React, { memo } from 'react'
 import { User } from './search-panel'
-interface Project {
+export interface Project {
   id: number
   name: string
-  personId: number
+  personId: string
   pin: boolean
   organization: string
   created: number
 }
 
-interface ListProps {
-  list: Project[]
+// extends的作用：使得所有的props都能透传到table,，此时List传进来的props类型为Table已有类型+users的类型
+interface ListProps extends TableProps<Project> {
   users: User[]
 }
 
-const list = memo(({ list, users }: ListProps) => {
+const list = memo(({ users, ...props }: ListProps) => {
   return (
     // <div>
     //   <Table dataSource={list} columns={columns}>
@@ -71,14 +72,13 @@ const list = memo(({ list, users }: ListProps) => {
             }
           }
         ]}
-        dataSource={list}
+        // 将所有除了users的props内容展开并传入,此时等于dataSource = {list},loading = {isLoading}
+        {...props}
       />
     </Container>
   )
 })
 
-const Container = styled.div`
-  padding: 0 3.2rem;
-`
+const Container = styled.div``
 
 export default list

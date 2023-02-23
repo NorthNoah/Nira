@@ -28,7 +28,6 @@ const SearchPannel = memo(({ users, param, setParam }: SearchPanelProps) => {
 
   return (
     <Container>
-      <h1 css={{ fontWeight: '500' }}>项目列表</h1>
       <Form css={{ marginBottom: '2rem' }} layout="inline">
         <Form.Item>
           <Input
@@ -70,8 +69,6 @@ const SearchPannel = memo(({ users, param, setParam }: SearchPanelProps) => {
   )
 })
 
-const Container = styled.div`
-  padding: 3.2rem;
-`
+const Container = styled.div``
 
 export default SearchPannel
