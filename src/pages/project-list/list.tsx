@@ -3,6 +3,7 @@ import { Table } from 'antd'
 import { TableProps } from 'antd/lib/table'
 import dayjs from 'dayjs'
 import React, { memo } from 'react'
+import { Link } from 'react-router-dom'
 import { User } from './search-panel'
 export interface Project {
   id: number
@@ -43,13 +44,16 @@ const list = memo(({ users, ...props }: ListProps) => {
     // </div>
     <Container>
       <Table
-        rowKey={'id'}
+        rowKey="id"
         pagination={false}
         columns={[
           {
             title: '名称',
-            dataIndex: 'name',
-            sorter: (a, b) => a.name.localeCompare(b.name)
+            // 跳转到相应的项目页面，使用Link
+            sorter: (a, b) => a.name.localeCompare(b.name),
+            render(value, project) {
+              return <Link to={String(project.id)}>{project.name}</Link>
+            }
           },
           {
             title: '部门',

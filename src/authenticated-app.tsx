@@ -7,37 +7,51 @@ import { Row } from './components/lib'
 // 以组件的形式渲染SVG
 import { ReactComponent as SoftwareLogo } from './assets/software-logo.svg'
 import { Button, Dropdown, Menu } from 'antd'
+import { Routes, Route, Link } from 'react-router-dom'
+import ProjectPage from 'pages/project'
 
 export const AuthenticatedApp = () => {
-  const { logout, user } = useAuth()
   return (
     <Container>
-      <Header between={true}>
-        <HeaderLeft gap={5}>
-          <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
-          <h2>项目</h2>
-          <h2>用户</h2>
-        </HeaderLeft>
-        <HeaderRight>
-          <Dropdown
-            overlay={
-              <Menu>
-                <Menu.Item key={'logout'}>
-                  <Button type="link" onClick={logout}>
-                    登出
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            }
-          >
-            <a onClick={(e) => e.preventDefault()}>Hi, Noah{user?.name}</a>
-          </Dropdown>
-        </HeaderRight>
-      </Header>
+      <PageHeader />
       <Main>
-        <ProjectListPages />
+        <Routes>
+          <Route path={'/'} element={<ProjectListPages />}></Route>
+          <Route path={'/projects'} element={<ProjectListPages />}>
+            <Route path={':projectId/*'} element={<ProjectPage />}></Route>
+          </Route>
+        </Routes>
       </Main>
     </Container>
+  )
+}
+
+const PageHeader = () => {
+  const { logout, user } = useAuth()
+  return (
+    <Header between={true}>
+      <HeaderLeft gap={5}>
+        <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
+        {/* <h2>项目</h2> */}
+        <Link to="/projects">项目</Link>
+        <h2>用户</h2>
+      </HeaderLeft>
+      <HeaderRight>
+        <Dropdown
+          overlay={
+            <Menu>
+              <Menu.Item key={'logout'}>
+                <Button type="link" onClick={logout}>
+                  登出
+                </Button>
+              </Menu.Item>
+            </Menu>
+          }
+        >
+          <a onClick={(e) => e.preventDefault()}>Hi, Noah{user?.name}</a>
+        </Dropdown>
+      </HeaderRight>
+    </Header>
   )
 }
 const Container = styled.div`
