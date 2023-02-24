@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react'
 import SearchPannel from './search-panel'
 import List from './list'
-import { useDebounce } from 'utils'
+import { useDebounce, useDocumentTitle } from 'utils'
 import styled from '@emotion/styled'
 import { Typography } from 'antd'
 import { useProjects } from 'utils/project'
@@ -72,6 +72,8 @@ const ProjectListPages = memo(() => {
   // })
   const { isLoading, error, data: list } = useProjects(debouncedParam)
   const { data: users } = useUsers()
+
+  useDocumentTitle('项目列表', false)
 
   return (
     <Container>

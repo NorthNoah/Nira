@@ -6,11 +6,14 @@ import RegisterPage from './register'
 import logo from 'assets/logo.svg'
 import right from 'assets/right.svg'
 import left from 'assets/left.svg'
+import { useDocumentTitle } from 'utils'
 
 const UnauthenticatedApp = memo(() => {
   const [isRegister, setIsRegister] = useState(false)
   // 控制error是否显示的状态
   const [error, setError] = useState<Error | null>(null)
+
+  useDocumentTitle('请登录注册以继续')
 
   return (
     <Container>

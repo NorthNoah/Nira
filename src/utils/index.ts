@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 // 防止value为0被误删
 export const isFalsy = <T>(value: T) => (value === 0 ? false : !value)
 
@@ -51,4 +51,23 @@ export const useDebounce = <T>(value: T, delay?: number) => {
   }, [value, delay])
 
   return debouncedVal
+}
+
+// 改变页面标题
+export const useDocumentTitle = (title: string, keepOnMount = true) => {
+  // 通过useRef保存了之前的旧title变量,使其不会因为重新渲染而发生改变
+  const oldTitle = useRef(document.title).current
+
+  useEffect(() => {
+    document.title = title
+  }, [title])
+
+  // 当前页面组件卸载，则回到旧标题
+  useEffect(() => {
+    return () => {
+      if (!keepOnMount) {
+        document.title = oldTitle
+      }
+    }
+  }, [keepOnMount, oldTitle])
 }
