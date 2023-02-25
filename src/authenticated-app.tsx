@@ -7,7 +7,7 @@ import { Row } from './components/lib'
 // 以组件的形式渲染SVG
 import { ReactComponent as SoftwareLogo } from './assets/software-logo.svg'
 import { Button, Dropdown, Menu } from 'antd'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import ProjectPage from 'pages/project'
 
 export const AuthenticatedApp = () => {
@@ -16,10 +16,9 @@ export const AuthenticatedApp = () => {
       <PageHeader />
       <Main>
         <Routes>
-          <Route path={'/'} element={<ProjectListPages />}></Route>
-          <Route path={'/projects'} element={<ProjectListPages />}>
-            <Route path={':projectId/*'} element={<ProjectPage />}></Route>
-          </Route>
+          <Route path={'/'} element={<Navigate to="/projects" />}></Route>
+          <Route path={'/projects'} element={<ProjectListPages />} />
+          <Route path={'/projects/:projectId/*'} element={<ProjectPage />} />
         </Routes>
       </Main>
     </Container>
