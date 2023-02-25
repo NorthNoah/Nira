@@ -9,6 +9,7 @@ import { ReactComponent as SoftwareLogo } from './assets/software-logo.svg'
 import { Button, Dropdown, Menu } from 'antd'
 import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import ProjectPage from 'pages/project'
+import { resetRoute } from 'utils'
 
 export const AuthenticatedApp = () => {
   return (
@@ -30,9 +31,11 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={5}>
-        <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
+        <Button type="link" onClick={resetRoute}>
+          <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
+        </Button>
         {/* <h2>项目</h2> */}
-        <Link to="/projects">项目</Link>
+        <Link to="projects">项目</Link>
         <h2>用户</h2>
       </HeaderLeft>
       <HeaderRight>
