@@ -1,8 +1,10 @@
-import React, { ProviderProps, ReactNode, useState, createContext, useContext } from 'react'
+import React, { ReactNode, createContext, useContext } from 'react'
 import * as auth from 'auth/auth-provider'
 import { User } from 'pages/project-list/search-panel'
 import { http } from 'utils/http'
 import { useMount } from 'utils'
+import { useAsync } from 'utils/use-async'
+import { FullPageErrorFallback, FullPageLoading } from 'components/lib'
 interface AuthForm {
   username: string
   password: string
@@ -36,15 +38,32 @@ const AuthContext = createContext<
 // 确定AuthProvider的类型,放在APP.tsx中实际使用
 // 传入children节点，含义是嵌套
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null) //登录：User 退出：null
+  // const [user, setUser] = useState<User | null>(null) //登录：User 退出：null
   const login = (form: AuthForm) => auth.login(form).then((user) => setUser(user))
   const register = (form: AuthForm) => auth.register(form).then((user) => setUser(user))
   const logout = () => auth.logout().then(() => setUser(null))
+
+  const {
+    data: user,
+    error,
+    isLoading,
+    isIdle,
+    isError,
+    setData: setUser
+  } = useAsync<User | null>()
 
   // 刷新后,自动初始化User,带着token去请求user,并将user的值设置到state中
   useMount(() => {
     bootstrapUser().then(setUser)
   })
+
+  if (isIdle || isLoading) {
+    return <FullPageLoading />
+  }
+
+  if (isError) {
+    return <FullPageErrorFallback error={error} />
+  }
   return <AuthContext.Provider children={children} value={{ user, login, register, logout }} />
 }
 
