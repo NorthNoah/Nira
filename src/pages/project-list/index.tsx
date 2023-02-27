@@ -6,6 +6,7 @@ import styled from '@emotion/styled'
 import { Typography } from 'antd'
 import { useProjects } from 'utils/project'
 import { useUsers } from 'utils/user'
+import { useUrlQueryParam } from 'utils/url'
 // 此种写法 默认访问3000端口
 // const apiUrl = process.env.REACT_APP_API_URL
 
@@ -16,10 +17,13 @@ const ProjectListPages = memo(() => {
   //   const [personId, setPersonId] = useState('')
 
   // 映射userId和userName
-  const [param, setParam] = useState({
-    name: '',
-    personId: ''
-  })
+  // const [param, setParam] = useState({
+  //   name: '',
+  //   personId: ''
+  // })
+
+  // 通过hook管理查询的参数
+  const [param, setParam] = useUrlQueryParam(['name', 'personId'])
   const debouncedParam = useDebounce(param, 500)
 
   // // 获取数据
