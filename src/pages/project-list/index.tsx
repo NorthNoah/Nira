@@ -24,7 +24,8 @@ const ProjectListPages = memo(() => {
 
   // 通过hook管理查询的参数
   const [param, setParam] = useUrlQueryParam(['name', 'personId'])
-  const debouncedParam = useDebounce(param, 500)
+  const projectsParam = { ...param, personId: Number(param.personId) || undefined }
+  const debouncedParam = useDebounce(projectsParam, 500)
 
   // // 获取数据
   // const [list, setList] = useState([])

@@ -3,6 +3,7 @@
 import styled from '@emotion/styled'
 import { Form, Input, Select } from 'antd'
 import React, { memo } from 'react'
+import { Project } from './list'
 export interface User {
   id: number
   name: string
@@ -13,10 +14,7 @@ export interface User {
 }
 interface SearchPanelProps {
   users: User[]
-  param: {
-    name: string
-    personId: string
-  }
+  param: Pick<Project, 'name' | 'personId'>
   setParam: (param: SearchPanelProps['param']) => void
 }
 
