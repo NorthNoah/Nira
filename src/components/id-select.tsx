@@ -1,9 +1,9 @@
 import { Select } from 'antd'
-import React, { memo } from 'react'
+import React from 'react'
 import { Raw } from 'type'
 
 // 透传Select的所有参数,且防止冲突
-type SelectProps = React.Component<typeof Select>
+type SelectProps = React.ComponentProps<typeof Select>
 
 interface idSelectProps extends Omit<SelectProps, 'value' | 'onChange' | 'options'> {
   value: Raw | null | undefined

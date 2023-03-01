@@ -14,7 +14,7 @@ export interface User {
 }
 interface SearchPanelProps {
   users: User[]
-  param: Pick<Project, 'name' | 'personId'>
+  param: Partial<Pick<Project, 'name' | 'personId'>>
   setParam: (param: SearchPanelProps['param']) => void
 }
 
