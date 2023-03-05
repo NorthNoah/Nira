@@ -14315,6 +14315,11 @@ which@^2.0.1, which@^2.0.2:
   dependencies:
     isexe "^2.0.0"
 
+why-did-you-render@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmmirror.com/why-did-you-render/-/why-did-you-render-1.0.1.tgz#ec0a295d351c4cbe3ff14224874a7e372c653081"
+  integrity sha512-TmQovUkok34fz069rzOXCfUZBIF04XpIRXKMa9tgLOUGbRnl8+LEEqO1myjHGtpGuJ4xvV7Vh5+4OongeFSlBg==
+
 word-wrap@^1.0.3, word-wrap@^1.2.3, word-wrap@~1.2.3:
   version "1.2.3"
   resolved "https://registry.npmmirror.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"

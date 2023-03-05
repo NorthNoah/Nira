@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import SearchPannel from './search-panel'
 import List from './list'
 import { useDebounce, useDocumentTitle } from 'utils'
@@ -11,7 +11,7 @@ import { useUrlQueryParam } from 'utils/url'
 // const apiUrl = process.env.REACT_APP_API_URL
 
 // 本地开发时(npm start)，访问mock；构建产物(npm build),访问真实地址
-const ProjectListPages = memo(() => {
+const ProjectListPages = () => {
   // 两个参数
   //   const [projName, setProjName] = useState('')
   //   const [personId, setPersonId] = useState('')
@@ -24,7 +24,9 @@ const ProjectListPages = memo(() => {
 
   // 通过hook管理查询的参数
   const [param, setParam] = useUrlQueryParam(['name', 'personId'])
-  const projectsParam = { ...param, personId: Number(param.personId) || undefined }
+  const projectsParam = useMemo(() => {
+    return { ...param, personId: Number(param.personId) || undefined }
+  }, [param])
   const debouncedParam = useDebounce(projectsParam, 500)
 
   // // 获取数据
@@ -88,7 +90,8 @@ const ProjectListPages = memo(() => {
       <List loading={isLoading} users={users || []} dataSource={list || []} />
     </Container>
   )
-})
+}
+ProjectListPages.whyDidYouRender = true
 
 const Container = styled.div`
   padding: 3.2rem;
