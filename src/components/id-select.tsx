@@ -32,7 +32,11 @@ const IdSelect = (props: idSelectProps) => {
       ) : null}
 
       {option?.map((option) => {
-        return <Select.Option value={option.id}>{option.name}</Select.Option>
+        return (
+          <Select.Option key={option.id} value={option.id}>
+            {option.name}
+          </Select.Option>
+        )
       })}
     </Select>
   )
