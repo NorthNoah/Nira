@@ -1,6 +1,7 @@
 import qs from 'qs'
 import * as auth from 'auth/auth-provider'
 import { useAuth } from 'context/auth-context'
+import { useCallback } from 'react'
 
 const apiUrl = 'http://localhost:3001'
 
@@ -50,6 +51,9 @@ export const http = async (
 // 需要编写useHttp来将token自动注入,返回请求的数据
 export const useHttp = () => {
   const { user } = useAuth()
-  return (...[endpoint, config]: Parameters<typeof http>) =>
-    http(endpoint, { ...config, token: user?.token })
+  return useCallback(
+    (...[endpoint, config]: Parameters<typeof http>) =>
+      http(endpoint, { ...config, token: user?.token }),
+    [user?.token]
+  )
 }

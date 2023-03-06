@@ -88,3 +88,16 @@ export const subset = <O extends { [key in string]: unknown }, K extends keyof O
   const filteredEntries = Object.entries(obj).filter(([key]) => keys.includes(key as K))
   return Object.fromEntries(filteredEntries) as Pick<O, K>
 }
+
+export const useMountedRef = () => {
+  const mountedRef = useRef(false)
+
+  useEffect(() => {
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
+    }
+  })
+
+  return mountedRef
+}
