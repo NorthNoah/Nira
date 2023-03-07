@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
+import React, { useState } from 'react'
 import ProjectListPages from 'pages/project-list'
 import { useAuth } from 'context/auth-context'
 import styled from '@emotion/styled'
@@ -10,33 +10,42 @@ import { Button, Dropdown, Menu } from 'antd'
 import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import ProjectPage from 'pages/project'
 import { resetRoute } from 'utils'
+import { ProjectModal } from 'pages/project-list/project-modal'
+import { ProjectPopover } from 'pages/project-list/project-popover'
 
 export const AuthenticatedApp = () => {
+  const [projectModalOpen, setProjectModalOpen] = useState(false)
   return (
     <Container>
-      <PageHeader />
+      <PageHeader setProjectModalOpen={setProjectModalOpen} />
       <Main>
         <Routes>
           <Route path={'/'} element={<Navigate to="/projects" />}></Route>
-          <Route path={'/projects'} element={<ProjectListPages />} />
+          <Route
+            path={'/projects'}
+            element={<ProjectListPages setProjectModalOpen={setProjectModalOpen} />}
+          />
           <Route path={'/projects/:projectId/*'} element={<ProjectPage />} />
         </Routes>
       </Main>
+      <ProjectModal
+        projectModalOpen={projectModalOpen}
+        onClose={() => setProjectModalOpen(false)}
+      />
     </Container>
   )
 }
 
-const PageHeader = () => {
+const PageHeader = (props: { setProjectModalOpen: (isOpen: boolean) => void }) => {
   const { logout, user } = useAuth()
   return (
     <Header between={true}>
-      <HeaderLeft gap={5}>
-        <Button type="link" onClick={resetRoute}>
-          <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
+      <HeaderLeft gap={true}>
+        <Button style={{ padding: 0 }} type="link" onClick={resetRoute}>
+          <SoftwareLogo width={'14rem'} color={'rgb(38, 132, 255)'} />
         </Button>
-        {/* <h2>项目</h2> */}
-        <Link to="projects">项目</Link>
-        <h2>用户</h2>
+        <ProjectPopover setProjectModalOpen={props.setProjectModalOpen} />
+        <span>用户</span>
       </HeaderLeft>
       <HeaderRight>
         <Dropdown
