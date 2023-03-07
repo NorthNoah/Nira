@@ -1,14 +1,17 @@
 import styled from '@emotion/styled'
 import { Table } from 'antd'
 import { TableProps } from 'antd/lib/table'
+import { Pin } from 'components/pin'
 import dayjs from 'dayjs'
+import { title } from 'process'
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
+import { useEditProject } from 'utils/project'
 import { User } from './search-panel'
 export interface Project {
   id: number
   name: string
-  personId: string
+  personId: number
   pin: boolean
   organization: string
   created: number
@@ -17,9 +20,13 @@ export interface Project {
 // extends的作用：使得所有的props都能透传到table,，此时List传进来的props类型为Table已有类型+users的类型
 interface ListProps extends TableProps<Project> {
   users: User[]
+  refresh?: () => void
 }
 
-const list = memo(({ users, ...props }: ListProps) => {
+const list = ({ users, ...props }: ListProps) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { mutate } = useEditProject()
+  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin }).then(props.refresh)
   return (
     // <div>
     //   <Table dataSource={list} columns={columns}>
@@ -47,6 +54,12 @@ const list = memo(({ users, ...props }: ListProps) => {
         rowKey="id"
         pagination={false}
         columns={[
+          {
+            title: <Pin checked={true} disabled={true} />,
+            render(value, project) {
+              return <Pin checked={project.pin} onCheckedChange={pinProject(project.id)} />
+            }
+          },
           {
             title: '名称',
             // 跳转到相应的项目页面，使用Link
@@ -81,7 +94,7 @@ const list = memo(({ users, ...props }: ListProps) => {
       />
     </Container>
   )
-})
+}
 
 const Container = styled.div``
 
