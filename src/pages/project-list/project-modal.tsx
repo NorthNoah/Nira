@@ -9,12 +9,12 @@ export const ProjectModal = () => {
   const projectModalOpen = useSelector(selectProjectModalOpen)
   return (
     <Drawer
-      onClose={() => dispatch(projectListActions.closeProjectModal)}
+      onClose={() => dispatch(projectListActions.closeProjectModal())}
       visible={projectModalOpen}
       width={'100%'}
     >
       <h1>Project Modal</h1>
-      <Button onClick={() => dispatch(projectListActions.openProjectModal)}>关闭</Button>
+      <Button onClick={() => dispatch(projectListActions.closeProjectModal())}>关闭</Button>
     </Drawer>
   )
 }

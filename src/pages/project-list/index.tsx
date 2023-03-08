@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import SearchPannel from './search-panel'
 import List from './list'
 import { useDebounce, useDocumentTitle } from 'utils'
@@ -88,7 +88,7 @@ const ProjectListPages = () => {
     <Container>
       <Row between={true}>
         <h1>项目列表</h1>
-        <Button onClick={() => dispatch(projectListActions.openProjectModal)}>创建项目</Button>
+        <Button onClick={() => dispatch(projectListActions.openProjectModal())}>创建项目</Button>
       </Row>
       <SearchPannel param={projectsParam} setParam={setParam} users={users || []} />
       {error ? <Typography.Text type="danger">{error.message}</Typography.Text> : null}

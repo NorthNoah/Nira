@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react'
+import React from 'react'
 import ProjectListPages from 'pages/project-list'
 import { useAuth } from 'context/auth-context'
 import styled from '@emotion/styled'

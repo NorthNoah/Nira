@@ -1,7 +1,7 @@
 // 引入编译器，可以使用emotion的增强行内样式
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled'
-import { Form, Input, Select } from 'antd'
+import { Form, Input } from 'antd'
 import UserSelect from 'components/user-select'
 import React, { memo } from 'react'
 import { Project } from './list'
