@@ -1,4 +1,4 @@
-import { useCallback, useReducer, useState } from 'react'
+import { useCallback, useReducer } from 'react'
 // 用useReducer改写useUndo
 
 const UNDO = 'UNDO'

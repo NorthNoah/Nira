@@ -1,13 +1,17 @@
 import styled from '@emotion/styled'
-import { Table } from 'antd'
+import { Dropdown, Menu, Table } from 'antd'
 import { TableProps } from 'antd/lib/table'
+import { ButtonNoPadding } from 'components/lib'
 import { Pin } from 'components/pin'
 import dayjs from 'dayjs'
 import { title } from 'process'
 import React, { memo } from 'react'
+import { useDispatch } from 'react-redux/es/hooks/useDispatch'
 import { Link } from 'react-router-dom'
 import { useEditProject } from 'utils/project'
+import { projectListActions } from './project-list.slice'
 import { User } from './search-panel'
+
 export interface Project {
   id: number
   name: string
@@ -26,6 +30,8 @@ interface ListProps extends TableProps<Project> {
 const list = ({ users, ...props }: ListProps) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { mutate } = useEditProject()
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const dispatch = useDispatch()
   const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin }).then(props.refresh)
   return (
     // <div>
@@ -85,6 +91,28 @@ const list = ({ users, ...props }: ListProps) => {
             render(project) {
               return (
                 <span>{project.created ? dayjs(project.created).format('YYYY-MM-DD') : '无'}</span>
+              )
+            }
+          },
+          {
+            render(value, project) {
+              return (
+                <Dropdown
+                  overlay={
+                    <Menu>
+                      <Menu.Item key={'edit'}>
+                        <ButtonNoPadding
+                          onClick={() => dispatch(projectListActions.openProjectModal())}
+                          type={'link'}
+                        >
+                          编辑
+                        </ButtonNoPadding>
+                      </Menu.Item>
+                    </Menu>
+                  }
+                >
+                  <ButtonNoPadding type={'link'}>...</ButtonNoPadding>
+                </Dropdown>
               )
             }
           }
