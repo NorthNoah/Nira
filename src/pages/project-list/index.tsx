@@ -8,11 +8,12 @@ import { useProjects } from 'utils/project'
 import { useUsers } from 'utils/user'
 import { useUrlQueryParam } from 'utils/url'
 import { Row } from 'components/lib'
+import { useProjectModal } from './util'
 // 此种写法 默认访问3000端口
 // const apiUrl = process.env.REACT_APP_API_URL
 
 // 本地开发时(npm start)，访问mock；构建产物(npm build),访问真实地址
-const ProjectListPages = (props: { setProjectModalOpen: (isOpen: boolean) => void }) => {
+const ProjectListPages = () => {
   // 两个参数
   //   const [projName, setProjName] = useState('')
   //   const [personId, setPersonId] = useState('')
@@ -81,11 +82,12 @@ const ProjectListPages = (props: { setProjectModalOpen: (isOpen: boolean) => voi
   const { isLoading, error, data: list, retry } = useProjects(debouncedParam)
   const { data: users } = useUsers()
   useDocumentTitle('项目列表', false)
+  const { open } = useProjectModal()
   return (
     <Container>
       <Row between={true}>
         <h1>项目列表</h1>
-        <Button onClick={() => props.setProjectModalOpen(true)}>创建项目</Button>
+        <Button onClick={open}>创建项目</Button>
       </Row>
       <SearchPannel param={projectsParam} setParam={setParam} users={users || []} />
       {error ? <Typography.Text type="danger">{error.message}</Typography.Text> : null}
