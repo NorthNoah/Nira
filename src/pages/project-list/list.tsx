@@ -8,6 +8,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useEditProject } from 'utils/project'
 import { User } from './search-panel'
+import { useProjectModal } from './util'
 export interface Project {
   id: number
   name: string
@@ -22,10 +23,11 @@ interface ListProps extends TableProps<Project> {
   users: User[]
 }
 
-const list = ({ users, ...props }: ListProps) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject()
+  const { startEdit } = useProjectModal()
   const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin })
+  const editProject = (id: number) => () => startEdit(id)
   return (
     // <div>
     //   <Table dataSource={list} columns={columns}>
@@ -93,7 +95,9 @@ const list = ({ users, ...props }: ListProps) => {
                 <Dropdown
                   overlay={
                     <Menu>
-                      <Menu.Item key={'edit'}>编辑</Menu.Item>
+                      <Menu.Item onClick={editProject(project.id)} key={'edit'}>
+                        编辑
+                      </Menu.Item>
                       <Menu.Item key={'delete'}>删除</Menu.Item>
                     </Menu>
                   }
@@ -113,4 +117,4 @@ const list = ({ users, ...props }: ListProps) => {
 
 const Container = styled.div``
 
-export default list
+export default List
