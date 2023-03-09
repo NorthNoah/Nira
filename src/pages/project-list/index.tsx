@@ -1,13 +1,13 @@
-import React, { memo, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import SearchPannel from './search-panel'
 import List from './list'
 import { useDebounce, useDocumentTitle } from 'utils'
 import styled from '@emotion/styled'
-import { Button, Typography } from 'antd'
+import { Button } from 'antd'
 import { useProjects } from 'utils/project'
 import { useUsers } from 'utils/user'
 import { useUrlQueryParam } from 'utils/url'
-import { Row } from 'components/lib'
+import { ErrorBox, Row } from 'components/lib'
 import { useProjectModal } from './util'
 // 此种写法 默认访问3000端口
 // const apiUrl = process.env.REACT_APP_API_URL
@@ -79,7 +79,7 @@ const ProjectListPages = () => {
 
   // client('users').then(setUsers)
   // })
-  const { isLoading, error, data: list, retry } = useProjects(debouncedParam)
+  const { isLoading, error, data: list } = useProjects(debouncedParam)
   const { data: users } = useUsers()
   useDocumentTitle('项目列表', false)
   const { open } = useProjectModal()
@@ -90,8 +90,8 @@ const ProjectListPages = () => {
         <Button onClick={open}>创建项目</Button>
       </Row>
       <SearchPannel param={projectsParam} setParam={setParam} users={users || []} />
-      {error ? <Typography.Text type="danger">{error.message}</Typography.Text> : null}
-      <List refresh={retry} loading={isLoading} users={users || []} dataSource={list || []} />
+      <ErrorBox error={error}></ErrorBox>
+      <List loading={isLoading} users={users || []} dataSource={list || []} />
     </Container>
   )
 }

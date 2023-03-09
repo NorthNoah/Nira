@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Button, Card, Divider, Typography } from 'antd'
+import { Button, Card, Divider } from 'antd'
 import React, { memo, useState } from 'react'
 import LoginPage from './login'
 import RegisterPage from './register'
@@ -7,6 +7,7 @@ import logo from 'assets/logo.svg'
 import right from 'assets/right.svg'
 import left from 'assets/left.svg'
 import { useDocumentTitle } from 'utils'
+import { ErrorBox } from 'components/lib'
 
 const UnauthenticatedApp = memo(() => {
   const [isRegister, setIsRegister] = useState(false)
@@ -22,7 +23,7 @@ const UnauthenticatedApp = memo(() => {
       <ShadowCard>
         <Title>{isRegister ? '请注册' : '请登录'}</Title>
         {/* 错误处理 */}
-        {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
+        <ErrorBox error={error} />
         {isRegister ? <RegisterPage onError={setError} /> : <LoginPage onError={setError} />}
         <Divider />
         <Button type="link" onClick={() => setIsRegister(!isRegister)}>

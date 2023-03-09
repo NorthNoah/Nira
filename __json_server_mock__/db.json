@@ -24,7 +24,7 @@
       "personId": 1,
       "organization": "外卖组",
       "created": 1604989757139,
-      "pin": true
+      "pin": false
     },
     {
       "id": 2,
@@ -48,7 +48,7 @@
       "personId": 3,
       "organization": "总部",
       "created": 1604980000011,
-      "pin": false
+      "pin": true
     },
     {
       "id": 5,
