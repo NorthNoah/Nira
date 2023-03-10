@@ -24,7 +24,7 @@
       "personId": 1,
       "organization": "外卖组",
       "created": 1604989757139,
-      "pin": false
+      "pin": true
     },
     {
       "id": 2,
@@ -57,84 +57,6 @@
       "organization": "外卖组",
       "created": 1546900800000,
       "pin": true
-    },
-    {
-      "name": "111",
-      "organization": "222",
-      "personId": 1,
-      "id": 6
-    },
-    {
-      "name": "111",
-      "organization": "222",
-      "personId": 1,
-      "id": 7
-    },
-    {
-      "name": "1",
-      "organization": "2",
-      "personId": 1,
-      "id": 8
-    },
-    {
-      "name": "1",
-      "organization": "2",
-      "personId": 1,
-      "id": 9
-    },
-    {
-      "name": "1",
-      "organization": "2",
-      "personId": 1,
-      "id": 10
-    },
-    {
-      "name": "1",
-      "organization": "2",
-      "personId": 1,
-      "id": 11
-    },
-    {
-      "name": "1",
-      "organization": "2",
-      "personId": 1,
-      "id": 12
-    },
-    {
-      "name": "1",
-      "organization": "1",
-      "personId": 1,
-      "id": 13
-    },
-    {
-      "name": "1",
-      "organization": "1",
-      "personId": 1,
-      "id": 14
-    },
-    {
-      "name": "1",
-      "organization": "1",
-      "personId": 1,
-      "id": 15
-    },
-    {
-      "name": "1",
-      "organization": "2",
-      "personId": 1,
-      "id": 16
-    },
-    {
-      "name": "1",
-      "organization": "2",
-      "personId": 1,
-      "id": 17
-    },
-    {
-      "name": "1",
-      "organization": "2",
-      "personId": 1,
-      "id": 18
     }
   ],
   "me": {

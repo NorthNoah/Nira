@@ -6,13 +6,13 @@ import { useForm } from 'rc-field-form'
 import React, { useEffect } from 'react'
 import { useAddProject, useEditProject } from 'utils/project'
 import { useUrlQueryParam } from 'utils/url'
-import { useProjectModal } from './util'
+import { useProjectModal, useProjectsQueryKey } from './util'
 
 export const ProjectModal = () => {
   const { projectModalOpen, close, editingProject, isLoading } = useProjectModal()
   const useMutateProject = editingProject ? useEditProject : useAddProject
   // 异步的mutate
-  const { mutateAsync, error, isLoading: mutateLoading } = useMutateProject()
+  const { mutateAsync, error, isLoading: mutateLoading } = useMutateProject(useProjectsQueryKey())
   const [form] = useForm()
   const onFinish = (values: any) => {
     mutateAsync({ ...editingProject, ...values }).then(() => {
