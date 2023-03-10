@@ -1,56 +1,76 @@
 import { useAsync } from 'utils/use-async'
 import { Project } from 'pages/project-list/list'
-import { useCallback, useEffect } from 'react'
 import { cleanObject } from 'utils/index'
 import { useHttp } from 'utils/http'
+import { QueryKey, useMutation, useQuery, useQueryClient } from 'react-query'
+import { useAddConfig, useDeleteConfig, useEditConfig } from './use-optimistics-options'
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp()
-  const { run, ...result } = useAsync<Project[]>()
-  const fetchProjects = useCallback(
-    () => client('projects', { data: cleanObject(param || {}) }),
-    [client, param]
+  // param改变时自动获取数据
+  return useQuery<Project[], Error>(['projects', param], () =>
+    client('projects', { data: cleanObject(param || {}) })
   )
-
-  useEffect(() => {
-    run(fetchProjects(), {
-      retry: fetchProjects
-    })
-  }, [fetchProjects, param, run])
-
-  return result
 }
 
-export const useEditProject = () => {
-  const { run, ...asyncResult } = useAsync()
+// 外部传入queryKey，更具有通用性
+export const useEditProject = (queryKey: QueryKey) => {
   const client = useHttp()
-  const mutate = (params: Partial<Project>) => {
-    return run(
+  const queryClient = useQueryClient()
+  return useMutation(
+    (params: Partial<Project>) =>
       client(`projects/${params.id}`, {
-        data: params,
-        method: 'PATCH'
-      })
-    )
-  }
-  return {
-    mutate,
-    ...asyncResult
-  }
+        method: 'PATCH',
+        data: params
+      }),
+    // {
+    //   onSuccess: () => queryClient.invalidateQueries('projects'),
+    //   // 实现乐观更新
+    //   // async onMutate(target) {
+    //   //   const previousItems = queryClient.getQueryData(queryKey)
+    //   //   queryClient.setQueryData(queryKey, (old?: Project[]) => {
+    //   //     return old?.map(project => project.id === target.id ? {...project, ...target} : project)
+    //   //   })
+    //   //   return {previousItems}
+    //   // },
+    //   // onError(error, newItem, context) {
+    //   //   queryClient.setQueryData(queryKey, (context as {previousItem: Project[]}).previousItem)
+    //   // }
+    // }
+    useEditConfig(queryKey)
+  )
 }
 
-export const useAddProject = () => {
-  const { run, ...asyncResult } = useAsync()
+export const useAddProject = (queryKey: QueryKey) => {
   const client = useHttp()
-  const mutate = (params: Partial<Project>) => {
-    return run(
-      client(`projects/${params.id}`, {
+  return useMutation(
+    (params: Partial<Project>) =>
+      client(`projects`, {
         data: params,
         method: 'POST'
-      })
-    )
-  }
-  return {
-    mutate,
-    ...asyncResult
-  }
+      }),
+    // {
+    //   onSuccess: () => queryClient.invalidateQueries('projects')
+    // }
+    useAddConfig(queryKey)
+  )
+}
+
+export const useDeleteProject = (queryKey: QueryKey) => {
+  const client = useHttp()
+
+  return useMutation(
+    ({ id }: { id: number }) =>
+      client(`projects/${id}`, {
+        method: 'DELETE'
+      }),
+    useDeleteConfig(queryKey)
+  )
+}
+
+export const useProject = (id?: number) => {
+  const client = useHttp()
+  return useQuery<Project>(['project', { id }], () => client(`projects/${id}`), {
+    enabled: Boolean(id)
+  })
 }

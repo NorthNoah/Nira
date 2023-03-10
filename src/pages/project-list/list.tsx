@@ -1,13 +1,14 @@
 import styled from '@emotion/styled'
-import { Table } from 'antd'
+import { Dropdown, Menu, Modal, Table } from 'antd'
 import { TableProps } from 'antd/lib/table'
+import { ButtonNoPadding } from 'components/lib'
 import { Pin } from 'components/pin'
 import dayjs from 'dayjs'
-import { title } from 'process'
-import React, { memo } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { useEditProject } from 'utils/project'
+import { useDeleteProject, useEditProject } from 'utils/project'
 import { User } from './search-panel'
+import { useProjectModal, useProjectsQueryKey } from './util'
 export interface Project {
   id: number
   name: string
@@ -20,13 +21,13 @@ export interface Project {
 // extends的作用：使得所有的props都能透传到table,，此时List传进来的props类型为Table已有类型+users的类型
 interface ListProps extends TableProps<Project> {
   users: User[]
-  refresh?: () => void
 }
 
-const list = ({ users, ...props }: ListProps) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { mutate } = useEditProject()
-  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin }).then(props.refresh)
+const List = ({ users, ...props }: ListProps) => {
+  const { mutate } = useEditProject(useProjectsQueryKey())
+  const { startEdit } = useProjectModal()
+  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin })
+  const editProject = (id: number) => () => startEdit(id)
   return (
     // <div>
     //   <Table dataSource={list} columns={columns}>
@@ -87,6 +88,11 @@ const list = ({ users, ...props }: ListProps) => {
                 <span>{project.created ? dayjs(project.created).format('YYYY-MM-DD') : '无'}</span>
               )
             }
+          },
+          {
+            render(value, project) {
+              return <More project={project} />
+            }
           }
         ]}
         // 将所有除了users的props内容展开并传入,此时等于dataSource = {list},loading = {isLoading}
@@ -95,7 +101,38 @@ const list = ({ users, ...props }: ListProps) => {
     </Container>
   )
 }
+const More = ({ project }: { project: Project }) => {
+  const { startEdit } = useProjectModal()
+  const editProject = (id: number) => () => startEdit(id)
+  const { mutate: deleteProject } = useDeleteProject(useProjectsQueryKey())
+  const confirmDeleteProject = (id: number) => {
+    Modal.confirm({
+      title: '确定删除这个项目吗?',
+      content: '点击确定删除',
+      okText: '确定',
+      onOk() {
+        deleteProject({ id })
+      }
+    })
+  }
+  return (
+    <Dropdown
+      overlay={
+        <Menu>
+          <Menu.Item onClick={editProject(project.id)} key={'edit'}>
+            编辑
+          </Menu.Item>
+          <Menu.Item onClick={() => confirmDeleteProject(project.id)} key={'delete'}>
+            删除
+          </Menu.Item>
+        </Menu>
+      }
+    >
+      <ButtonNoPadding type="link">...</ButtonNoPadding>
+    </Dropdown>
+  )
+}
 
 const Container = styled.div``
 
-export default list
+export default List

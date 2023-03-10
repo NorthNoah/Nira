@@ -48,7 +48,7 @@
       "personId": 3,
       "organization": "总部",
       "created": 1604980000011,
-      "pin": false
+      "pin": true
     },
     {
       "id": 5,

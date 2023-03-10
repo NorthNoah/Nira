@@ -14,29 +14,22 @@ import { ProjectModal } from 'pages/project-list/project-modal'
 import { ProjectPopover } from 'pages/project-list/project-popover'
 
 export const AuthenticatedApp = () => {
-  const [projectModalOpen, setProjectModalOpen] = useState(false)
   return (
     <Container>
-      <PageHeader setProjectModalOpen={setProjectModalOpen} />
+      <PageHeader />
       <Main>
         <Routes>
           <Route path={'/'} element={<Navigate to="/projects" />}></Route>
-          <Route
-            path={'/projects'}
-            element={<ProjectListPages setProjectModalOpen={setProjectModalOpen} />}
-          />
+          <Route path={'/projects'} element={<ProjectListPages />} />
           <Route path={'/projects/:projectId/*'} element={<ProjectPage />} />
         </Routes>
       </Main>
-      <ProjectModal
-        projectModalOpen={projectModalOpen}
-        onClose={() => setProjectModalOpen(false)}
-      />
+      <ProjectModal />
     </Container>
   )
 }
 
-const PageHeader = (props: { setProjectModalOpen: (isOpen: boolean) => void }) => {
+const PageHeader = () => {
   const { logout, user } = useAuth()
   return (
     <Header between={true}>
@@ -44,7 +37,7 @@ const PageHeader = (props: { setProjectModalOpen: (isOpen: boolean) => void }) =
         <Button style={{ padding: 0 }} type="link" onClick={resetRoute}>
           <SoftwareLogo width={'14rem'} color={'rgb(38, 132, 255)'} />
         </Button>
-        <ProjectPopover setProjectModalOpen={props.setProjectModalOpen} />
+        <ProjectPopover />
         <span>用户</span>
       </HeaderLeft>
       <HeaderRight>
