@@ -1,6 +1,6 @@
 // 在真实环境中，如果使用firebase这种第三方auth服务的话，本文件不需要开发者开发
 
-import { User } from 'pages/project-list/search-panel'
+import { User } from 'type/User'
 
 const apiUrl = 'http://localhost:3001'
 

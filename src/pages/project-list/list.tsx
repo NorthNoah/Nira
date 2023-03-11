@@ -7,17 +7,9 @@ import dayjs from 'dayjs'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDeleteProject, useEditProject } from 'utils/project'
-import { User } from './search-panel'
+import { Project } from '../../type/project'
+import { User } from '../../type/User'
 import { useProjectModal, useProjectsQueryKey } from './util'
-export interface Project {
-  id: number
-  name: string
-  personId: number
-  pin: boolean
-  organization: string
-  created: number
-}
-
 // extends的作用：使得所有的props都能透传到table,，此时List传进来的props类型为Table已有类型+users的类型
 interface ListProps extends TableProps<Project> {
   users: User[]

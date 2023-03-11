@@ -13,7 +13,10 @@ const ProjectPage = memo(() => {
       <Routes>
         {/* 注意组件内的路由是自动嵌套的 */}
         {/* 默认路径：看板 */}
-        <Route path="/" element={<Navigate to={window.location.pathname + '/kanban'} />} />
+        <Route
+          path="/"
+          element={<Navigate to={window.location.pathname + '/kanban'} replace={true} />}
+        />
         <Route path={'/kanban'} element={<KanbanPage />} />
         <Route path={'/task'} element={<TaskPage />} />
       </Routes>
