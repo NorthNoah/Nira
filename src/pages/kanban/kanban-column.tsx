@@ -7,7 +7,6 @@ import taskIcon from 'assets/task.svg'
 import bugIcon from 'assets/bug.svg'
 import styled from '@emotion/styled'
 import { Card } from 'antd'
-import { SearchPannel } from './search-pannel'
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskTypes } = useTaskTypes()
@@ -27,7 +26,6 @@ export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id)
   return (
     <div>
-      <SearchPannel />
       <Container>
         <h3>{kanban.name}</h3>
         <TaskContainer>
