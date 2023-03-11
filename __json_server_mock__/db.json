@@ -70,5 +70,60 @@
     "user": {
       "token": 123
     }
-  }
+  },
+  "kanbans": [
+    {
+      "id": 1,
+      "name": "待完成",
+      "projectId": 1
+    },
+    {
+      "id": 2,
+      "name": "开发中",
+      "projectId": 1
+    },
+    {
+      "id": 3,
+      "name": "已完成",
+      "projectId": 1
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "name": "管理注册界面开发",
+      "kanbanId": 1
+    },
+    {
+      "id": 2,
+      "name": "性能优化",
+      "kanbanId": 1
+    },
+    {
+      "id": 3,
+      "name": "自测",
+      "kanbanId": 1
+    },
+    {
+      "id": 4,
+      "name": "管理登录界面开发",
+      "kanbanId": 2
+    },
+    {
+      "id": 5,
+      "name": "UI开发",
+      "kanbanId": 2
+    },
+    {
+      "id": 6,
+      "name": "单元测试",
+      "kanbanId": 3
+    },
+    {
+      "id": 7,
+      "name": "权限管理界面开发",
+      "kanbanId": 3
+    }
+  ]
+
 }
