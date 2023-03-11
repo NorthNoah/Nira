@@ -57,6 +57,12 @@
       "organization": "外卖组",
       "created": 1546900800000,
       "pin": true
+    },
+    {
+      "name": "战鹰今年三岁",
+      "organization": "无",
+      "personId": 2,
+      "id": 6
     }
   ],
   "me": {
