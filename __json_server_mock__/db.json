@@ -92,44 +92,51 @@
     {
       "id": 1,
       "name": "管理注册界面开发",
-      "kanbanId": 2,
-      "typeId": 2
+      "kanbanId": 1,
+      "typeId": 2,
+      "processorId": 1
     },
     {
       "id": 2,
       "name": "性能优化",
       "kanbanId": 2,
-      "typeId": 2
+      "typeId": 2,
+      "processorId": 1
     },
     {
       "id": 3,
       "name": "自测",
       "kanbanId": 1,
-      "typeId": 1
+      "typeId": 1,
+      "processorId": 4
     },
     {
       "id": 4,
       "name": "管理登录界面开发",
       "kanbanId": 3,
-      "typeId": 2
+      "typeId": 2,
+      "processorId": 2
     },
     {
       "id": 5,
       "name": "UI开发",
       "kanbanId": 2,
-      "typeId": 2
+      "typeId": 2,
+      "processorId": 1
     },
     {
       "id": 6,
       "name": "单元测试",
-      "kanbanId": 3,
-      "typeId": 1
+      "kanbanId": 1,
+      "typeId": 1,
+      "processorId": 3
     },
     {
       "id": 7,
       "name": "权限管理界面开发",
       "kanbanId": 3,
-      "typeId": 2
+      "typeId": 2,
+      "processorId": 4
     }
   ],
   "tasktypes": [
