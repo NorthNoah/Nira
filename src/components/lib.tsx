@@ -58,7 +58,7 @@ export const ButtonNoPadding = styled(Button)`
 
 // 竖向的项目容器
 export const ScreenContainer = styled.div`
-  padding: 3.2rem;
+  padding: 2rem;
   width: 100%;
   display: flex;
   flex-direction: column;

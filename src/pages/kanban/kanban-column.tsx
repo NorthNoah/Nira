@@ -43,14 +43,14 @@ export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
   )
 }
 
-const Container = styled.div`
-  min-width: 27rem;
+export const Container = styled.div`
+  min-width: 20rem;
   border-radius: 6px;
   background-color: rgb(244, 245, 247);
   display: flex;
   flex-direction: column;
   padding: 0.7rem 0.7rem 1rem;
-  margin-right: 1.5rem;
+  margin-right: 1rem;
 `
 const TaskItem = styled(Card)`
   margin-bottom: 0.5rem;
@@ -59,8 +59,10 @@ const TaskItem = styled(Card)`
 const TaskContainer = styled.div`
   /* 滑动条 */
   overflow: scroll;
+  flex: 1;
+
+  /* 隐藏y方向滚动条 */
   ::-webkit-scrollbar {
     display: none;
   }
-  flex: 1;
 `
