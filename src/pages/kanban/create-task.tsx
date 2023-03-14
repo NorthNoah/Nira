@@ -11,7 +11,7 @@ export const CreateTask = ({ kanbanId }: { kanbanId: number }) => {
   const [inputMode, setInputMode] = useState(false)
 
   const submit = async () => {
-    await addTask({ name, kanbanId })
+    await addTask({ name, kanbanId, typeId: 1 })
     // 是否处于正在输入状态
     setInputMode(false)
     setName('')

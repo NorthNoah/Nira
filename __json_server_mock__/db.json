@@ -152,6 +152,17 @@
       "kanbanId": 3,
       "typeId": 2,
       "processorId": 4
+    },
+    {
+      "name": "管理注册",
+      "kanbanId": 4,
+      "id": 8
+    },
+    {
+      "name": "管理",
+      "kanbanId": 4,
+      "typeId": 1,
+      "id": 9
     }
   ],
   "tasktypes": [
