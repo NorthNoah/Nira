@@ -28,7 +28,8 @@ export const ProjectModal = () => {
   }
 
   const title = editingProject ? '编辑项目' : '创建项目'
-  //当表单改变时，重置表单
+
+  //当表单改变时，设置表单数据
   useEffect(() => {
     form.setFieldsValue(editingProject)
   }, [editingProject, form])

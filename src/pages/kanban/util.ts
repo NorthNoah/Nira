@@ -1,6 +1,7 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useLocation } from 'react-router'
 import { useProject } from 'utils/project'
+import { useTask } from 'utils/task'
 import { useUrlQueryParam } from 'utils/url'
 
 // 需要获取项目id和名称
@@ -33,3 +34,29 @@ export const useTasksSearchParams = () => {
   }, [param, projectId])
 }
 export const useTasksQueryKey = () => ['tasks', useTasksSearchParams()]
+
+export const useTasksModal = () => {
+  const [{ editingTaskId }, setEditingTaskId] = useUrlQueryParam(['editingTaskId'])
+  const { data: editingTask, isLoading } = useTask(Number(editingTaskId))
+  // 进入编辑状态
+  const startEdit = useCallback(
+    (id: number) => {
+      setEditingTaskId({ editingTaskId: id })
+    },
+    [setEditingTaskId]
+  )
+
+  // 关闭模态框
+  const close = useCallback(() => {
+    setEditingTaskId({ editingTaskId: '' })
+  }, [setEditingTaskId])
+
+  return {
+    taskModalOpen: Boolean(editingTask),
+    editingTaskId,
+    editingTask,
+    startEdit,
+    close,
+    isLoading
+  }
+}

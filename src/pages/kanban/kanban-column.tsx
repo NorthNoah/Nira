@@ -2,7 +2,7 @@ import React from 'react'
 import { Kanban } from 'type/kanban'
 import { useTasks } from 'utils/task'
 import { useTaskTypes } from 'utils/task-type'
-import { useTasksSearchParams } from './util'
+import { useTasksModal, useTasksSearchParams } from './util'
 import taskIcon from 'assets/task.svg'
 import bugIcon from 'assets/bug.svg'
 import styled from '@emotion/styled'
@@ -25,6 +25,11 @@ export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
   // 查找数据，filter
   const { data: allTasks } = useTasks(useTasksSearchParams())
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id)
+  const { startEdit } = useTasksModal()
+  const editTask = (id: number) => () => {
+    startEdit(id)
+    console.log(id)
+  }
   return (
     <div>
       <Container>
@@ -32,7 +37,7 @@ export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
         <TaskContainer>
           {tasks?.map((task) => (
             <div key={task.id}>
-              <TaskItem>
+              <TaskItem onClick={editTask(task.id)}>
                 <div>{task.name}</div>
                 <TaskTypeIcon id={task.typeId} />
               </TaskItem>
