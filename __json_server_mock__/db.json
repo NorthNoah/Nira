@@ -86,6 +86,21 @@
       "id": 3,
       "name": "已完成",
       "projectId": 1
+    },
+    {
+      "name": "技术难点",
+      "projectId": 1,
+      "id": 4
+    },
+    {
+      "name": "达到",
+      "projectId": 1,
+      "id": 5
+    },
+    {
+      "name": "11111",
+      "projectId": 1,
+      "id": 6
     }
   ],
   "tasks": [

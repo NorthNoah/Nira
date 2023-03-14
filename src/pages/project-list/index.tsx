@@ -85,7 +85,7 @@ const ProjectListPages = () => {
   const { open } = useProjectModal()
   return (
     <ScreenContainer>
-      <Row between={true}>
+      <Row between={true} style={{ marginBottom: '1.5rem' }}>
         <h1>项目列表</h1>
         <ButtonNoPadding onClick={open} type={'link'}>
           创建项目

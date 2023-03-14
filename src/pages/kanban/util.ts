@@ -21,7 +21,7 @@ export const useKanbansQueryKey = () => ['kanbans', useKanbanSearchParams()]
 export const useTasksSearchParams = () => {
   const [param, setParam] = useUrlQueryParam(['name', 'typeId', 'processorId', 'tagId'])
   // 从url直接读取projectId
-  const projectId = useProjectInUrl()
+  const projectId = useProjectIdInUrl()
   return useMemo(() => {
     return {
       projectId,
