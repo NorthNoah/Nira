@@ -1,5 +1,7 @@
-import { Drawer, Form, Input, Modal } from 'antd'
+import { Button, Drawer, Form, Input, Modal } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
+import TasktypeSelect from 'components/task-type-select'
+import UserSelect from 'components/user-select'
 import React from 'react'
 import { useEffect } from 'react'
 import { useEditTask } from 'utils/task'
@@ -24,6 +26,7 @@ export const TaskModal = () => {
 
   const onFinish = async () => {
     await editTask({ ...editingTask, ...form.getFieldsValue })
+    close()
   }
 
   //当form或editingTask改变时，更新表格数据
@@ -37,7 +40,10 @@ export const TaskModal = () => {
       cancelText={'取消'}
       confirmLoading={editLoading}
       title={'编辑任务'}
-      visible={taskModalOpen}
+      visible={Boolean(editingTask)}
+      onCancel={closeModal}
+      onOk={onFinish}
+      forceRender={true}
     >
       {/* 初始值填充为被编辑的task */}
       <Form {...layout} initialValues={editingTask} form={form} onFinish={onFinish}>
@@ -48,7 +54,16 @@ export const TaskModal = () => {
         >
           <Input placeholder={'请输入任务名称'}></Input>
         </Form.Item>
-        <Form.Item label={'任务组'} name={'organization'}></Form.Item>
+        {/* <Form.Item label={'任务组'} name={'organization'}></Form.Item> */}
+        <Form.Item label={'经办人'} name={'processId'}>
+          <UserSelect defaultOptionName={'经办人'}></UserSelect>
+        </Form.Item>
+        <Form.Item label={'类型'} name={'typeId'}>
+          <TasktypeSelect></TasktypeSelect>
+        </Form.Item>
+        <Form.Item style={{ textAlign: 'right' }}>
+          <Button></Button>
+        </Form.Item>
       </Form>
     </Modal>
   )

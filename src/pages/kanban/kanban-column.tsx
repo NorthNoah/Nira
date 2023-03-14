@@ -26,9 +26,8 @@ export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
   const { data: allTasks } = useTasks(useTasksSearchParams())
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id)
   const { startEdit } = useTasksModal()
-  const editTask = (id: number) => () => {
+  const editTask = (id: number) => {
     startEdit(id)
-    console.log(id)
   }
   return (
     <div>
@@ -37,7 +36,7 @@ export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
         <TaskContainer>
           {tasks?.map((task) => (
             <div key={task.id}>
-              <TaskItem onClick={editTask(task.id)}>
+              <TaskItem onClick={() => editTask(task.id)}>
                 <div>{task.name}</div>
                 <TaskTypeIcon id={task.typeId} />
               </TaskItem>
@@ -61,6 +60,7 @@ export const Container = styled.div`
 `
 const TaskItem = styled(Card)`
   margin-bottom: 0.5rem;
+  cursor: pointer;
 `
 
 const TaskContainer = styled.div`

@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import { useLocation } from 'react-router'
+import { useDebounce } from 'utils'
 import { useProject } from 'utils/project'
 import { useTask } from 'utils/task'
 import { useUrlQueryParam } from 'utils/url'
@@ -23,15 +24,16 @@ export const useTasksSearchParams = () => {
   const [param, setParam] = useUrlQueryParam(['name', 'typeId', 'processorId', 'tagId'])
   // 从url直接读取projectId
   const projectId = useProjectIdInUrl()
+  const debouncedName = useDebounce(param.name, 200)
   return useMemo(() => {
     return {
       projectId,
       typeId: Number(param.typeId) || undefined,
       processorId: Number(param.processorId) || undefined,
       tagId: Number(param.tagId) || undefined,
-      name: param.name
+      name: debouncedName
     }
-  }, [param, projectId])
+  }, [debouncedName, param.processorId, param.tagId, param.typeId, projectId])
 }
 export const useTasksQueryKey = () => ['tasks', useTasksSearchParams()]
 

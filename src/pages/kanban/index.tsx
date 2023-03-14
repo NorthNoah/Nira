@@ -9,6 +9,7 @@ import { CreateKanban } from './create-kanban'
 import { CreateTask } from './create-task'
 import { KanbanColumn } from './kanban-column'
 import { SearchPannel } from './search-pannel'
+import { TaskModal } from './task-modal'
 import { useKanbanSearchParams, useProjectInUrl, useTasksSearchParams } from './util'
 
 const KanbanPage = () => {
@@ -32,6 +33,7 @@ const KanbanPage = () => {
           <CreateKanban />
         </ColumnsContainer>
       )}
+      <TaskModal />
     </ScreenContainer>
   )
 }
