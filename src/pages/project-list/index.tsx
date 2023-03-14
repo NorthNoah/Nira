@@ -7,7 +7,7 @@ import { Button } from 'antd'
 import { useProjects } from 'utils/project'
 import { useUsers } from 'utils/user'
 import { useUrlQueryParam } from 'utils/url'
-import { ErrorBox, Row } from 'components/lib'
+import { ButtonNoPadding, ErrorBox, Row, ScreenContainer } from 'components/lib'
 import { useProjectModal } from './util'
 // 此种写法 默认访问3000端口
 // const apiUrl = process.env.REACT_APP_API_URL
@@ -84,15 +84,17 @@ const ProjectListPages = () => {
   useDocumentTitle('项目列表', false)
   const { open } = useProjectModal()
   return (
-    <Container>
-      <Row between={true}>
+    <ScreenContainer>
+      <Row between={true} style={{ marginBottom: '1.5rem' }}>
         <h1>项目列表</h1>
-        <Button onClick={open}>创建项目</Button>
+        <ButtonNoPadding onClick={open} type={'link'}>
+          创建项目
+        </ButtonNoPadding>
       </Row>
       <SearchPannel param={projectsParam} setParam={setParam} users={users || []} />
       <ErrorBox error={error}></ErrorBox>
       <List loading={isLoading} users={users || []} dataSource={list || []} />
-    </Container>
+    </ScreenContainer>
   )
 }
 ProjectListPages.whyDidYouRender = false

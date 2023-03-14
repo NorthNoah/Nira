@@ -1,25 +1,23 @@
-import { useAsync } from 'utils/use-async'
-import { Project } from 'type/project'
-import { cleanObject } from 'utils/index'
-import { useHttp } from 'utils/http'
 import { QueryKey, useMutation, useQuery, useQueryClient } from 'react-query'
+import { Task } from 'type/task'
+import { cleanObject } from 'utils'
+import { useHttp } from './http'
 import { useAddConfig, useDeleteConfig, useEditConfig } from './use-optimistics-options'
 
-export const useProjects = (param?: Partial<Project>) => {
+export const useTasks = (param?: Partial<Task>) => {
   const client = useHttp()
   // param改变时自动获取数据
-  return useQuery<Project[], Error>(['projects', param], () =>
-    client('projects', { data: cleanObject(param || {}) })
+  return useQuery<Task[], Error>(['tasks', param], () =>
+    client('tasks', { data: cleanObject(param || {}) })
   )
 }
 
-// 外部传入queryKey，更具有通用性
-export const useEditProject = (queryKey: QueryKey) => {
+export const useEditTask = (queryKey: QueryKey) => {
   const client = useHttp()
   const queryClient = useQueryClient()
   return useMutation(
-    (params: Partial<Project>) =>
-      client(`projects/${params.id}`, {
+    (params: Partial<Task>) =>
+      client(`tasks/${params.id}`, {
         method: 'PATCH',
         data: params
       }),
@@ -41,11 +39,11 @@ export const useEditProject = (queryKey: QueryKey) => {
   )
 }
 
-export const useAddProject = (queryKey: QueryKey) => {
+export const useAddTask = (queryKey: QueryKey) => {
   const client = useHttp()
   return useMutation(
-    (params: Partial<Project>) =>
-      client(`projects`, {
+    (params: Partial<Task>) =>
+      client(`tasks`, {
         data: params,
         method: 'POST'
       }),
@@ -56,21 +54,22 @@ export const useAddProject = (queryKey: QueryKey) => {
   )
 }
 
-export const useDeleteProject = (queryKey: QueryKey) => {
+export const useDeleteTask = (queryKey: QueryKey) => {
   const client = useHttp()
 
   return useMutation(
     ({ id }: { id: number }) =>
-      client(`projects/${id}`, {
+      client(`tasks/${id}`, {
         method: 'DELETE'
       }),
     useDeleteConfig(queryKey)
   )
 }
 
-export const useProject = (id?: number) => {
+// 获取Task详情
+export const useTask = (id?: number) => {
   const client = useHttp()
-  return useQuery<Project>(['project', { id }], () => client(`projects/${id}`), {
+  return useQuery<Task>(['task', { id }], () => client(`tasks/${id}`), {
     enabled: Boolean(id)
   })
 }

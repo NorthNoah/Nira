@@ -21,15 +21,21 @@ export const ProjectModal = () => {
       close()
     })
   }
+  const closeModal = () => {
+    // 重置表单
+    form.resetFields()
+    close()
+  }
 
   const title = editingProject ? '编辑项目' : '创建项目'
-  //当表单改变时，重置表单
+
+  //当表单改变时，设置表单数据
   useEffect(() => {
     form.setFieldsValue(editingProject)
   }, [editingProject, form])
 
   return (
-    <Drawer forceRender={true} onClose={close} visible={projectModalOpen} width={'100%'}>
+    <Drawer forceRender={true} onClose={closeModal} visible={projectModalOpen} width={'100%'}>
       <Container>
         {isLoading ? (
           <Spin size={'large'} />

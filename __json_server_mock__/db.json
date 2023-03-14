@@ -57,11 +57,132 @@
       "organization": "外卖组",
       "created": 1546900800000,
       "pin": true
+    },
+    {
+      "name": "战鹰今年三岁",
+      "organization": "无",
+      "personId": 2,
+      "id": 6,
+      "pin": false
     }
   ],
   "me": {
     "user": {
       "token": 123
     }
-  }
+  },
+  "kanbans": [
+    {
+      "id": 1,
+      "name": "待完成",
+      "projectId": 1
+    },
+    {
+      "id": 2,
+      "name": "开发中",
+      "projectId": 1
+    },
+    {
+      "id": 3,
+      "name": "已完成",
+      "projectId": 1
+    },
+    {
+      "name": "技术难点",
+      "projectId": 1,
+      "id": 4
+    },
+    {
+      "name": "达到",
+      "projectId": 1,
+      "id": 5
+    },
+    {
+      "name": "11111",
+      "projectId": 1,
+      "id": 6
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "name": "管理注册界面开发",
+      "kanbanId": 1,
+      "typeId": 2,
+      "processorId": 1
+    },
+    {
+      "id": 2,
+      "name": "性能优化",
+      "kanbanId": 2,
+      "typeId": 2,
+      "processorId": 1
+    },
+    {
+      "id": 3,
+      "name": "自测",
+      "kanbanId": 1,
+      "typeId": 1,
+      "processorId": 4
+    },
+    {
+      "id": 4,
+      "name": "管理登录界面开发",
+      "kanbanId": 3,
+      "typeId": 2,
+      "processorId": 2
+    },
+    {
+      "id": 5,
+      "name": "UI开发",
+      "kanbanId": 2,
+      "typeId": 2,
+      "processorId": 1
+    },
+    {
+      "id": 6,
+      "name": "单元测试",
+      "kanbanId": 1,
+      "typeId": 1,
+      "processorId": 3
+    },
+    {
+      "id": 7,
+      "name": "权限管理界面开发",
+      "kanbanId": 3,
+      "typeId": 2,
+      "processorId": 4
+    },
+    {
+      "name": "管理注册",
+      "kanbanId": 4,
+      "id": 8
+    },
+    {
+      "name": "管理",
+      "kanbanId": 4,
+      "typeId": 1,
+      "id": 9
+    }
+  ],
+  "tasktypes": [
+    {
+      "id": 1,
+      "name": "task"
+    },
+    {
+      "id": 2,
+      "name": "bug"
+    }
+  ],
+  "taskorgs": [
+    {
+      "id": 1,
+      "name": "骑手地图开发"
+    },
+    {
+      "id": 2,
+      "name": "骑手物料表单开发"
+    }
+  ]
 }

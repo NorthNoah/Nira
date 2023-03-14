@@ -1,4 +1,4 @@
-import { User } from 'pages/project-list/search-panel'
+import { User } from 'type/User'
 import { useHttp } from 'utils/http'
 import { useAsync } from 'utils/use-async'
 import { useEffect } from 'react'

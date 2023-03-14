@@ -35,7 +35,7 @@ const PageHeader = () => {
     <Header between={true}>
       <HeaderLeft gap={true}>
         <Button style={{ padding: 0 }} type="link" onClick={resetRoute}>
-          <SoftwareLogo width={'14rem'} color={'rgb(38, 132, 255)'} />
+          <SoftwareLogo width={'12rem'} color={'rgb(38, 132, 255)'} />
         </Button>
         <ProjectPopover />
         <span>用户</span>
@@ -60,15 +60,18 @@ const PageHeader = () => {
 }
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 6rem 1fr;
+  grid-template-rows: 4rem 1fr;
   height: 100vh;
 `
 
 const Header = styled(Row)`
-  padding: 3.2rem;
+  padding: 2rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
 `
 const HeaderLeft = styled(Row)``
 const HeaderRight = styled.div``
-const Main = styled.main``
+const Main = styled.main`
+  display: flex;
+  overflow: hidden;
+`
