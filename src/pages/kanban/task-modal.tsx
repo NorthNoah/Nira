@@ -4,7 +4,7 @@ import TasktypeSelect from 'components/task-type-select'
 import UserSelect from 'components/user-select'
 import React from 'react'
 import { useEffect } from 'react'
-import { useEditTask } from 'utils/task'
+import { useDeleteTask, useEditTask } from 'utils/task'
 import { useTasksModal, useTasksQueryKey } from './util'
 
 // antd自带样式布局
@@ -17,6 +17,8 @@ export const TaskModal = () => {
   //此处的editingTask只表示状态，没有实现功能
   const { taskModalOpen, editingTaskId, editingTask, close } = useTasksModal()
   const { mutateAsync: editTask, isLoading: editLoading } = useEditTask(useTasksQueryKey())
+  const { mutateAsync: deleteTask, isLoading: deleteLoading } = useDeleteTask(useTasksQueryKey())
+
   const closeModal = () => {
     // 关闭模态框
     close()
@@ -27,6 +29,17 @@ export const TaskModal = () => {
   const onFinish = async () => {
     await editTask({ ...editingTask, ...form.getFieldsValue })
     close()
+  }
+  const startDelete = () => {
+    close()
+    Modal.confirm({
+      okText: '确定',
+      cancelText: '取消',
+      title: '确定删除任务吗',
+      onOk() {
+        return deleteTask({ id: Number(editingTaskId) })
+      }
+    })
   }
 
   //当form或editingTask改变时，更新表格数据
@@ -59,11 +72,13 @@ export const TaskModal = () => {
           <UserSelect defaultOptionName={'经办人'}></UserSelect>
         </Form.Item>
         <Form.Item label={'类型'} name={'typeId'}>
-          <TasktypeSelect></TasktypeSelect>
+          <TasktypeSelect defaultOptionName={'类型'}></TasktypeSelect>
         </Form.Item>
-        <Form.Item style={{ textAlign: 'right' }}>
-          <Button></Button>
-        </Form.Item>
+        <div style={{ textAlign: 'right' }}>
+          <Button onClick={startDelete} style={{ fontSize: '14px' }} size={'small'}>
+            删除
+          </Button>
+        </div>
       </Form>
     </Modal>
   )

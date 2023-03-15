@@ -8,6 +8,8 @@ import bugIcon from 'assets/bug.svg'
 import styled from '@emotion/styled'
 import { Card } from 'antd'
 import { CreateTask } from './create-task'
+import { Task } from 'type/task'
+import { Mark } from 'components/Mark'
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskTypes } = useTaskTypes()
@@ -18,29 +20,40 @@ const TaskTypeIcon = ({ id }: { id: number }) => {
     return null
   }
   // type名称存在
-  return <img alt="" src={name === 'task' ? taskIcon : bugIcon}></img>
+  return <img alt={'task-icon'} src={name === 'task' ? taskIcon : bugIcon}></img>
 }
 
-export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
+const TaskCard = ({ task }: { task: Task }) => {
+  const { startEdit } = useTasksModal()
+  const { name: keyword } = useTasksSearchParams()
+  return (
+    <div key={task.id}>
+      <TaskItem onClick={() => startEdit(task.id)}>
+        <div>{task.name}</div>
+        <TaskTypeIcon id={task.typeId} />
+        {/* <p>
+          <Mark keyword={keyword} name={task.name} />
+        </p> */}
+      </TaskItem>
+    </div>
+  )
+}
+interface myKanban {
+  kanban: Kanban
+}
+
+export const KanbanColumn = ({ kanban }: myKanban) => {
   // 查找数据，filter
   const { data: allTasks } = useTasks(useTasksSearchParams())
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id)
   const { startEdit } = useTasksModal()
-  const editTask = (id: number) => {
-    startEdit(id)
-  }
   return (
     <div>
       <Container>
         <h3>{kanban.name}</h3>
         <TaskContainer>
           {tasks?.map((task) => (
-            <div key={task.id}>
-              <TaskItem onClick={() => editTask(task.id)}>
-                <div>{task.name}</div>
-                <TaskTypeIcon id={task.typeId} />
-              </TaskItem>
-            </div>
+            <TaskCard task={task} />
           ))}
           <CreateTask kanbanId={kanban.id} />
         </TaskContainer>
