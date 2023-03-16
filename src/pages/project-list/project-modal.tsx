@@ -5,7 +5,6 @@ import UserSelect from 'components/user-select'
 import { useForm } from 'rc-field-form'
 import React, { useEffect } from 'react'
 import { useAddProject, useEditProject } from 'utils/project'
-import { useUrlQueryParam } from 'utils/url'
 import { useProjectModal, useProjectsQueryKey } from './util'
 
 export const ProjectModal = () => {

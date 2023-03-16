@@ -2,14 +2,14 @@ import React from 'react'
 import { Kanban } from 'type/kanban'
 import { useTasks } from 'utils/task'
 import { useTaskTypes } from 'utils/task-type'
-import { useTasksModal, useTasksSearchParams } from './util'
+import { useTasksModal, useTasksSearchParams, useKanbansQueryKey } from './util'
 import taskIcon from 'assets/task.svg'
 import bugIcon from 'assets/bug.svg'
 import styled from '@emotion/styled'
-import { Card } from 'antd'
+import { Button, Card, Dropdown, Menu, Modal } from 'antd'
 import { CreateTask } from './create-task'
 import { Task } from 'type/task'
-import { Mark } from 'components/Mark'
+import { useDeleteKanban } from 'utils/use-kanban'
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskTypes } = useTaskTypes()
@@ -25,7 +25,6 @@ const TaskTypeIcon = ({ id }: { id: number }) => {
 
 const TaskCard = ({ task }: { task: Task }) => {
   const { startEdit } = useTasksModal()
-  const { name: keyword } = useTasksSearchParams()
   return (
     <div key={task.id}>
       <TaskItem onClick={() => startEdit(task.id)}>
@@ -42,23 +41,54 @@ interface myKanban {
   kanban: Kanban
 }
 
-export const KanbanColumn = ({ kanban }: myKanban) => {
-  // 查找数据，filter
-  const { data: allTasks } = useTasks(useTasksSearchParams())
-  const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id)
-  const { startEdit } = useTasksModal()
+// 转发ref后可直接绑定
+export const KanbanColumn = React.forwardRef<HTMLDivElement, myKanban>(
+  ({ kanban, ...props }, ref) => {
+    // 查找数据，filter
+    const { data: allTasks } = useTasks(useTasksSearchParams())
+    const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id)
+    return (
+      <div>
+        <Container {...props} ref={ref}>
+          <h3>{kanban.name}</h3>
+          <More kanban={kanban}></More>
+          <TaskContainer>
+            {tasks?.map((task) => (
+              <TaskCard task={task} key={task.id} />
+            ))}
+            <CreateTask kanbanId={kanban.id} />
+          </TaskContainer>
+        </Container>
+      </div>
+    )
+  }
+)
+
+const More = ({ kanban }: { kanban: Kanban }) => {
+  const { mutateAsync } = useDeleteKanban(useKanbansQueryKey())
+  const startDelete = () => {
+    Modal.confirm({
+      okText: '确定',
+      cancelText: '取消',
+      title: '确定删除看板吗',
+      onOk() {
+        return mutateAsync({ id: kanban.id })
+      }
+    })
+  }
+  const overlay = (
+    <Menu>
+      <Menu.Item>
+        <Button type={'link'} onClick={startDelete}>
+          删除
+        </Button>
+      </Menu.Item>
+    </Menu>
+  )
   return (
-    <div>
-      <Container>
-        <h3>{kanban.name}</h3>
-        <TaskContainer>
-          {tasks?.map((task) => (
-            <TaskCard task={task} />
-          ))}
-          <CreateTask kanbanId={kanban.id} />
-        </TaskContainer>
-      </Container>
-    </div>
+    <Dropdown overlay={overlay}>
+      <Button type={'link'}>...</Button>
+    </Dropdown>
   )
 }
 
