@@ -2,7 +2,13 @@ import { QueryKey, useMutation, useQuery, useQueryClient } from 'react-query'
 import { Task } from 'type/task'
 import { cleanObject } from 'utils'
 import { useHttp } from './http'
-import { useAddConfig, useDeleteConfig, useEditConfig } from './use-optimistics-options'
+import { SortProps } from './kanban'
+import {
+  useAddConfig,
+  useDeleteConfig,
+  useEditConfig,
+  useReorderConfig
+} from './use-optimistics-options'
 
 export const useTasks = (param?: Partial<Task>) => {
   const client = useHttp()
@@ -14,7 +20,7 @@ export const useTasks = (param?: Partial<Task>) => {
 
 export const useEditTask = (queryKey: QueryKey) => {
   const client = useHttp()
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
   return useMutation(
     (params: Partial<Task>) =>
       client(`tasks/${params.id}`, {
@@ -72,4 +78,14 @@ export const useTask = (id?: number) => {
   return useQuery<Task>(['task', { id }], () => client(`tasks/${id}`), {
     enabled: Boolean(id)
   })
+}
+
+export const useReorderTask = (queryKey: QueryKey) => {
+  const client = useHttp()
+  return useMutation((params: SortProps) => {
+    return client('tasks/reorder', {
+      data: params,
+      method: 'POST'
+    })
+  }, useReorderConfig(queryKey))
 }
