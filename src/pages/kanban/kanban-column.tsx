@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { Kanban } from 'type/kanban'
 import { useTasks } from 'utils/task'
 import { useTaskTypes } from 'utils/task-type'
@@ -10,6 +10,9 @@ import { Button, Card, Dropdown, Menu, Modal } from 'antd'
 import { CreateTask } from './create-task'
 import { Task } from 'type/task'
 import { useDeleteKanban } from 'utils/use-kanban'
+import { Row } from 'components/lib'
+import { Drag, Drop, DropChild } from 'components/drag-and-drop'
+import { Mark } from 'components/Mark'
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskTypes } = useTaskTypes()
@@ -23,20 +26,19 @@ const TaskTypeIcon = ({ id }: { id: number }) => {
   return <img alt={'task-icon'} src={name === 'task' ? taskIcon : bugIcon}></img>
 }
 
-const TaskCard = ({ task }: { task: Task }) => {
+const TaskCard = React.forwardRef<HTMLDivElement, { task: Task }>(({ task, ...props }, ref) => {
   const { startEdit } = useTasksModal()
   return (
     <div key={task.id}>
-      <TaskItem onClick={() => startEdit(task.id)}>
-        <div>{task.name}</div>
-        <TaskTypeIcon id={task.typeId} />
-        {/* <p>
-          <Mark keyword={keyword} name={task.name} />
-        </p> */}
-      </TaskItem>
+      <div ref={ref}>
+        <TaskItem onClick={() => startEdit(task.id)} key={task.id}>
+          <div>{task.name}</div>
+          <TaskTypeIcon id={task.typeId} />
+        </TaskItem>
+      </div>
     </div>
   )
-}
+})
 interface myKanban {
   kanban: Kanban
 }
@@ -50,12 +52,25 @@ export const KanbanColumn = React.forwardRef<HTMLDivElement, myKanban>(
     return (
       <div>
         <Container {...props} ref={ref}>
-          <h3>{kanban.name}</h3>
-          <More kanban={kanban}></More>
+          <Row between={true}>
+            <h3>{kanban.name}</h3>
+            <More kanban={kanban}></More>
+          </Row>
           <TaskContainer>
-            {tasks?.map((task) => (
-              <TaskCard task={task} key={task.id} />
-            ))}
+            {/* 任务拖拽功能实现 */}
+            {/* 以看板为单位 */}
+            <Drop type={'ROW'} direction={'vertical'} droppableId={String(kanban.id)}>
+              <DropChild>
+                {tasks?.map((task, taskIndex) => (
+                  // 以task为单位
+                  <Drag key={task.id} index={taskIndex} draggableId={'task' + task.id}>
+                    <div>
+                      <TaskCard task={task} key={task.id} />
+                    </div>
+                  </Drag>
+                ))}
+              </DropChild>
+            </Drop>
             <CreateTask kanbanId={kanban.id} />
           </TaskContainer>
         </Container>

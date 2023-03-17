@@ -29,17 +29,19 @@ const KanbanPage = () => {
           <Spin size={'large'} />
         ) : (
           // 拖放
-          <Drop type={'COLUMN'} direction={'horizontal'} droppableId={'kanban'}>
-            <ColumnsContainer>
-              {kanbans?.map((kanban, index) => (
-                // 拖拽
-                <Drag key={kanban.id} draggableId={'kanban' + kanban.id} index={index}>
-                  <KanbanColumn key={kanban.id} kanban={kanban}></KanbanColumn>
-                </Drag>
-              ))}
-              <CreateKanban />
-            </ColumnsContainer>
-          </Drop>
+          <ColumnsContainer>
+            <Drop type={'COLUMN'} direction={'horizontal'} droppableId={'kanban'}>
+              <DropChild style={{ display: 'flex' }}>
+                {kanbans?.map((kanban, index) => (
+                  // 拖拽
+                  <Drag key={kanban.id} draggableId={'kanban' + kanban.id} index={index}>
+                    <KanbanColumn key={kanban.id} kanban={kanban}></KanbanColumn>
+                  </Drag>
+                ))}
+              </DropChild>
+            </Drop>
+            <CreateKanban />
+          </ColumnsContainer>
         )}
         {/* 任务编辑模态框 */}
         <TaskModal />
@@ -51,7 +53,7 @@ const KanbanPage = () => {
 export default KanbanPage
 
 // 更改为渲染DropChild元素
-export const ColumnsContainer = styled(DropChild)`
+export const ColumnsContainer = styled.div`
   display: flex;
   overflow-x: scroll;
   flex: 1;
