@@ -5,7 +5,7 @@ import UnauthenticatedApp from 'unauthenticated-app'
 import { ErrorBoundary } from 'components/error-boundary'
 import { FullPageErrorFallback } from 'components/lib'
 
-const App = memo(() => {
+const App = () => {
   const { user } = useAuth()
   return (
     <div className="app">
@@ -15,6 +15,6 @@ const App = memo(() => {
       </ErrorBoundary>
     </div>
   )
-})
+}
 
 export default App
