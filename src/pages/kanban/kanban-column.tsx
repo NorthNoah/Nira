@@ -9,7 +9,7 @@ import styled from '@emotion/styled'
 import { Button, Card, Dropdown, Menu, Modal } from 'antd'
 import { CreateTask } from './create-task'
 import { Task } from 'type/task'
-import { useDeleteKanban } from 'utils/use-kanban'
+import { useDeleteKanban } from 'utils/kanban'
 import { Row } from 'components/lib'
 import { Drag, Drop, DropChild } from 'components/drag-and-drop'
 import { Mark } from 'components/Mark'
@@ -114,7 +114,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0.7rem 0.7rem 1rem;
-  margin-right: 1rem;
 `
 const TaskItem = styled(Card)`
   margin-bottom: 0.5rem;
@@ -124,10 +123,9 @@ const TaskItem = styled(Card)`
 const TaskContainer = styled.div`
   /* 滑动条 */
   overflow: scroll;
-  flex: 1;
-
   /* 隐藏y方向滚动条 */
   ::-webkit-scrollbar {
     display: none;
   }
+  flex: 1;
 `

@@ -7,7 +7,8 @@ import {
   useAddConfig,
   useDeleteConfig,
   useEditConfig,
-  useReorderConfig
+  useReorderConfig,
+  useReorderTaskConfig
 } from './use-optimistics-options'
 
 export const useTasks = (param?: Partial<Task>) => {
@@ -87,5 +88,5 @@ export const useReorderTask = (queryKey: QueryKey) => {
       data: params,
       method: 'POST'
     })
-  }, useReorderConfig(queryKey))
+  }, useReorderTaskConfig(queryKey))
 }
