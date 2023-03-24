@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Menu } from 'antd'
+import { EpicPage } from 'pages/epic'
 import KanbanPage from 'pages/kanban'
-import TaskPage from 'pages/task'
 import React, { memo } from 'react'
 import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
@@ -36,7 +36,7 @@ const ProjectPage = () => {
             element={<Navigate to={window.location.pathname + '/kanban'} replace={true} />}
           />
           <Route path={'/kanban'} element={<KanbanPage />} />
-          <Route path={'/task'} element={<TaskPage />} />
+          <Route path={'/task'} element={<EpicPage />} />
         </Routes>
       </Main>
     </Container>
@@ -54,7 +54,8 @@ const Main = styled.div`
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 12rem 1fr;
+  grid-template-columns: 16rem 1fr;
+  width: 100%;
 `
 
 export default ProjectPage

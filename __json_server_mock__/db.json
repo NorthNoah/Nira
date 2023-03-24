@@ -88,11 +88,6 @@
       "projectId": 1
     },
     {
-      "name": "jishu1",
-      "projectId": 1,
-      "id": 4
-    },
-    {
       "fromId": 2,
       "referenceId": 1,
       "type": "before",
@@ -191,7 +186,7 @@
       "id": 14
     }
   ],
-  "tasks": [
+  "task": [
     {
       "id": 1,
       "name": "管理注册界面开发",
@@ -264,14 +259,14 @@
       "name": "bug"
     }
   ],
-  "taskss": [
+  "tasks": [
     {
       "tags": [
         4
       ],
       "reporterId": 5,
       "processorId": 6,
-      "epicId": 4,
+      "epicId": 1,
       "kanbanId": 1,
       "favorite": true,
       "typeId": 2,
@@ -286,7 +281,7 @@
       ],
       "reporterId": 5,
       "processorId": 7,
-      "epicId": 6,
+      "epicId": 2,
       "kanbanId": 2,
       "favorite": true,
       "typeId": 1,
@@ -301,7 +296,7 @@
       ],
       "reporterId": 8,
       "processorId": 7,
-      "epicId": 4,
+      "epicId": 3,
       "kanbanId": 1,
       "favorite": true,
       "typeId": 2,
@@ -316,7 +311,7 @@
       ],
       "reporterId": 6,
       "processorId": 5,
-      "epicId": 4,
+      "epicId": 1,
       "kanbanId": 3,
       "favorite": true,
       "typeId": 2,
@@ -331,7 +326,7 @@
       ],
       "reporterId": 5,
       "processorId": 6,
-      "epicId": 6,
+      "epicId": 2,
       "kanbanId": 2,
       "favorite": true,
       "typeId": 1,
@@ -346,7 +341,7 @@
       ],
       "reporterId": 6,
       "processorId": 6,
-      "epicId": 5,
+      "epicId": 3,
       "kanbanId": 1,
       "favorite": true,
       "typeId": 2,
@@ -361,7 +356,7 @@
       ],
       "reporterId": 7,
       "processorId": 6,
-      "epicId": 6,
+      "epicId": 1,
       "kanbanId": 3,
       "favorite": true,
       "typeId": 1,
@@ -391,6 +386,29 @@
     {
       "id": 2,
       "name": "骑手物料表单开发"
+    }
+  ],
+  "epics": [
+    {
+      "id": 1,
+      "name": "骑手物料表单开发",
+      "projectId": 1,
+      "start": "2020-12-10",
+      "end": "2021-01-11"
+    },
+    {
+      "id": 2,
+      "name": "骑手地图开发",
+      "projectId": 1,
+      "start": "2021-01-12",
+      "end": "2021-02-14"
+    },
+    {
+      "id": 3,
+      "name": "骑手管理系统开发",
+      "projectId": 1,
+      "start": "2021-01-12",
+      "end": "2021-02-14"
     }
   ]
 }
