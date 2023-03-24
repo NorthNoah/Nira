@@ -12,7 +12,6 @@ import { Task } from 'type/task'
 import { useDeleteKanban } from 'utils/kanban'
 import { Row } from 'components/lib'
 import { Drag, Drop, DropChild } from 'components/drag-and-drop'
-import { Mark } from 'components/Mark'
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskTypes } = useTaskTypes()
