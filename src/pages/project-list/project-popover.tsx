@@ -1,12 +1,12 @@
 import styled from '@emotion/styled'
-import { Button, Divider, List, Popover, Typography } from 'antd'
+import { Divider, List, Popover, Typography } from 'antd'
 import { ButtonNoPadding } from 'components/lib'
 import React from 'react'
 import { useProjects } from 'utils/project'
 import { useProjectModal } from './util'
 
 export const ProjectPopover = () => {
-  const { data: projects, isLoading } = useProjects()
+  const { data: projects } = useProjects()
   const pinnedProjects = projects?.filter((project) => project.pin)
   const { open } = useProjectModal()
 

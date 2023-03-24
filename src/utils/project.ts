@@ -1,4 +1,3 @@
-import { useAsync } from 'utils/use-async'
 import { Project } from 'type/project'
 import { cleanObject } from 'utils/index'
 import { useHttp } from 'utils/http'
@@ -16,7 +15,6 @@ export const useProjects = (param?: Partial<Project>) => {
 // 外部传入queryKey，更具有通用性
 export const useEditProject = (queryKey: QueryKey) => {
   const client = useHttp()
-  const queryClient = useQueryClient()
   return useMutation(
     (params: Partial<Project>) =>
       client(`projects/${params.id}`, {

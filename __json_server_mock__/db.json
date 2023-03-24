@@ -88,22 +88,117 @@
       "projectId": 1
     },
     {
-      "name": "技术难点",
-      "projectId": 1,
-      "id": 4
-    },
-    {
-      "name": "达到",
-      "projectId": 1,
+      "fromId": 2,
+      "referenceId": 1,
+      "type": "before",
       "id": 5
     },
     {
-      "name": "11111",
-      "projectId": 1,
+      "fromId": 2,
+      "referenceId": 1,
+      "type": "before",
       "id": 6
     }
   ],
-  "tasks": [
+  "ColReorder": [
+    {
+      "fromId": 2,
+      "referenceId": 1,
+      "type": "before",
+      "id": 1
+    },
+    {
+      "fromId": 2,
+      "referenceId": 1,
+      "type": "before",
+      "id": 2
+    },
+    {
+      "fromId": 2,
+      "referenceId": 1,
+      "type": "before",
+      "id": 3
+    },
+    {
+      "fromId": 2,
+      "referenceId": 1,
+      "type": "before",
+      "id": 4
+    },
+    {
+      "fromId": 2,
+      "referenceId": 1,
+      "type": "before",
+      "id": 5
+    },
+    {
+      "fromId": 3,
+      "referenceId": 2,
+      "type": "before",
+      "id": 6
+    },
+    {
+      "fromId": 3,
+      "referenceId": 2,
+      "type": "before",
+      "id": 7
+    },
+    {
+      "fromId": 3,
+      "referenceId": 2,
+      "type": "before",
+      "id": 8
+    },
+    {
+      "fromId": 1,
+      "referenceId": 2,
+      "type": "after",
+      "id": 9
+    },
+    {
+      "fromId": 2,
+      "referenceId": 1,
+      "type": "before",
+      "id": 10
+    },
+    {
+      "fromId": 2,
+      "referenceId": 1,
+      "type": "before",
+      "id": 11
+    },
+    {
+      "fromId": 3,
+      "referenceId": 2,
+      "type": "before",
+      "id": 12
+    },
+    {
+      "fromId": 4,
+      "referenceId": 2,
+      "type": "before",
+      "id": 13
+    },
+    {
+      "fromId": 4,
+      "referenceId": 3,
+      "type": "before",
+      "id": 14
+    },
+    {
+      "fromId": 2,
+      "referenceId": 1,
+      "type": "before",
+      "id": 15
+    },
+    {
+      "fromId": 3,
+      "referenceId": 2,
+      "type": "before",
+      "id": 16
+    }
+  ],
+  "task": [
     {
       "id": 1,
       "name": "管理注册界面开发",
@@ -154,13 +249,14 @@
       "processorId": 4
     },
     {
-      "name": "管理注册",
-      "kanbanId": 4,
+      "name": "saas",
+      "kanbanId": 1,
+      "typeId": 1,
       "id": 8
     },
     {
-      "name": "管理",
-      "kanbanId": 4,
+      "name": "aaa",
+      "kanbanId": 1,
       "typeId": 1,
       "id": 9
     }
@@ -175,6 +271,113 @@
       "name": "bug"
     }
   ],
+  "tasks": [
+    {
+      "tags": [
+        4
+      ],
+      "reporterId": 5,
+      "processorId": 1,
+      "epicId": 1,
+      "kanbanId": 1,
+      "favorite": true,
+      "typeId": 2,
+      "note": "请尽快完成",
+      "ownerId": 2621423658,
+      "name": "管理注册界面开发",
+      "id": 1
+    },
+    {
+      "tags": [
+        4
+      ],
+      "reporterId": 5,
+      "processorId": 2,
+      "epicId": 2,
+      "kanbanId": 2,
+      "favorite": true,
+      "typeId": 1,
+      "note": "请使用JWT完成",
+      "ownerId": 2621423658,
+      "name": "管理登录界面开发",
+      "id": 2
+    },
+    {
+      "tags": [
+        5
+      ],
+      "reporterId": 8,
+      "processorId": 2,
+      "epicId": 3,
+      "kanbanId": 1,
+      "favorite": true,
+      "typeId": 2,
+      "note": "",
+      "ownerId": 2621423658,
+      "name": "权限管理界面开发",
+      "id": 3
+    },
+    {
+      "tags": [
+        6
+      ],
+      "reporterId": 6,
+      "processorId": 3,
+      "epicId": 1,
+      "kanbanId": 3,
+      "favorite": true,
+      "typeId": 2,
+      "note": "",
+      "ownerId": 2621423658,
+      "name": "UI开发",
+      "id": 4
+    },
+    {
+      "tags": [
+        4
+      ],
+      "reporterId": 5,
+      "processorId": 4,
+      "epicId": 2,
+      "kanbanId": 2,
+      "favorite": true,
+      "typeId": 1,
+      "note": "",
+      "ownerId": 2621423658,
+      "name": "自测",
+      "id": 5
+    },
+    {
+      "tags": [
+        6
+      ],
+      "reporterId": 6,
+      "processorId": 1,
+      "epicId": 3,
+      "kanbanId": 1,
+      "favorite": true,
+      "typeId": 2,
+      "note": "",
+      "ownerId": 2621423658,
+      "name": "单元测试",
+      "id": 6
+    },
+    {
+      "tags": [
+        4
+      ],
+      "reporterId": 7,
+      "processorId": 2,
+      "epicId": 1,
+      "kanbanId": 3,
+      "favorite": true,
+      "typeId": 1,
+      "note": "",
+      "ownerId": 2621423658,
+      "name": "性能优化",
+      "id": 7
+    }
+  ],
   "taskorgs": [
     {
       "id": 1,
@@ -183,6 +386,29 @@
     {
       "id": 2,
       "name": "骑手物料表单开发"
+    }
+  ],
+  "epics": [
+    {
+      "id": 1,
+      "name": "骑手物料表单开发",
+      "projectId": 1,
+      "start": "2020-12-10",
+      "end": "2021-01-11"
+    },
+    {
+      "id": 2,
+      "name": "骑手地图开发",
+      "projectId": 1,
+      "start": "2021-01-12",
+      "end": "2021-02-14"
+    },
+    {
+      "id": 3,
+      "name": "骑手管理系统开发",
+      "projectId": 1,
+      "start": "2021-01-12",
+      "end": "2021-02-14"
     }
   ]
 }
