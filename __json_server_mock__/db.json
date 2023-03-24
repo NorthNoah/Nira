@@ -184,6 +184,18 @@
       "referenceId": 3,
       "type": "before",
       "id": 14
+    },
+    {
+      "fromId": 2,
+      "referenceId": 1,
+      "type": "before",
+      "id": 15
+    },
+    {
+      "fromId": 3,
+      "referenceId": 2,
+      "type": "before",
+      "id": 16
     }
   ],
   "task": [
@@ -265,7 +277,7 @@
         4
       ],
       "reporterId": 5,
-      "processorId": 6,
+      "processorId": 1,
       "epicId": 1,
       "kanbanId": 1,
       "favorite": true,
@@ -280,7 +292,7 @@
         4
       ],
       "reporterId": 5,
-      "processorId": 7,
+      "processorId": 2,
       "epicId": 2,
       "kanbanId": 2,
       "favorite": true,
@@ -295,7 +307,7 @@
         5
       ],
       "reporterId": 8,
-      "processorId": 7,
+      "processorId": 2,
       "epicId": 3,
       "kanbanId": 1,
       "favorite": true,
@@ -310,7 +322,7 @@
         6
       ],
       "reporterId": 6,
-      "processorId": 5,
+      "processorId": 3,
       "epicId": 1,
       "kanbanId": 3,
       "favorite": true,
@@ -325,7 +337,7 @@
         4
       ],
       "reporterId": 5,
-      "processorId": 6,
+      "processorId": 4,
       "epicId": 2,
       "kanbanId": 2,
       "favorite": true,
@@ -340,7 +352,7 @@
         6
       ],
       "reporterId": 6,
-      "processorId": 6,
+      "processorId": 1,
       "epicId": 3,
       "kanbanId": 1,
       "favorite": true,
@@ -355,7 +367,7 @@
         4
       ],
       "reporterId": 7,
-      "processorId": 6,
+      "processorId": 2,
       "epicId": 1,
       "kanbanId": 3,
       "favorite": true,
@@ -364,18 +376,6 @@
       "ownerId": 2621423658,
       "name": "性能优化",
       "id": 7
-    },
-    {
-      "name": "aa1",
-      "kanbanId": 1,
-      "typeId": 1,
-      "id": 8
-    },
-    {
-      "name": "aaa1",
-      "kanbanId": 1,
-      "typeId": 1,
-      "id": 9
     }
   ],
   "taskorgs": [
