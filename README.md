@@ -1,6 +1,6 @@
 ## 项目介绍：提供多人协作、共同解决问题的平台。根据用户权限提供了不同的工作界面，可以编辑/创建所属团队项目状态，提供了更方便进行团队工作的任务看板，任务组的功能。
 ## 技术栈：React + TS + Antd + Redux-Toolkit + React-Query + Prettier + Commitlint
-## 项目演示地址：http://8.142.115.219
+## 项目演示地址：https://north-noah.top
 ## 项目特点
 * 基于JWT技术，实现前台的注册和登录鉴权模块；
 * 抽取数据请求、防抖、增删改查等通用Hook，封装了更为方便发送http请求的hook，获取、设置url参数的hook等；
